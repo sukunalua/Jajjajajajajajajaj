@@ -4732,9 +4732,9 @@ Tab:AddDropdown({
     end,
     __force_container = SettingTab
 })
-Tab:AddToggle({
+--[[Tab:AddToggle({
   Name = "",
-  Default = true,
+  Default = false,  
   Flag = "UIProtection",
   Callback = function(enabled)
     if enabled then
@@ -4750,7 +4750,7 @@ Tab:AddToggle({
 Tab:AddToggle({
     Name = "",
     Flag = "SidebarHover",
-    Default = true,
+    Default = false,  
     IsPC = true,
     Callback = function(enabled)
         if enabled then
@@ -4766,7 +4766,7 @@ Tab:AddToggle({
 Tab:AddToggle({
     Name = "",
     Flag = "SidebarHoverMobile",
-    Default = true,
+    Default = false,  
     IsMobile = true,
     Callback = function(enabled)
         if enabled then
@@ -4776,8 +4776,7 @@ Tab:AddToggle({
         end
     end,
     __force_container = SettingTab
-})
-
+})--]] 
 Tab:AddSection({
     Name = "التلوين",
     __force_container = SettingTab
@@ -4911,10 +4910,7 @@ Tab:AddSection({
     __force_container = SettingTab
 })
 
-Tab:AddParagraph({
-    "لازم ترفع الصور على روبلوكس \nانتضر ثلاث دقايق وانسخ الايدي\nلا تنشر صورة توصلك للباند",
-    __force_container = SettingTab
-})
+
 local windowImageID1 = ""
 local windowImageID2 = ""
 local windowImageID3 = ""
@@ -5025,4 +5021,3 @@ end)
 end
 
 return brutonlib
-
