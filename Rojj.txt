@@ -1444,7 +1444,7 @@ local WindowBackground = Create("ImageLabel", MainFrame, {
     Size = UDim2.new(1, 0, 1, 0),
     Position = UDim2.new(0, 0, 0, 0),
     BackgroundTransparency = 1,
-    Image = "rbxassetid://116895417735301", 
+    Image = "rbxassetid://107120100838637", 
     ImageTransparency = 0.2,
     ScaleType = Enum.ScaleType.Crop,
     ZIndex = 0
@@ -2769,7 +2769,7 @@ end
 			return TextBox
 		end
 			
-	function Tab:AddDiscordInvite(Configs)  -- ننشاء ديسكورد كذا كذا ما بنضيف لاكن نضيفه اذا احتجناه
+	function Tab:AddDiscordInvite(Configs)  
 	local Title = Configs[1] or Configs.Name or Configs.Title or "Discord"
 	local Desc = Configs.Desc or Configs.Description or ""
 	local Logo = Configs[2] or Configs.Logo or ""
@@ -2784,7 +2784,7 @@ end
 	local InviteLabel = Create("TextLabel", InviteHolder, {
 		Size = UDim2.new(1, 0, 0, 15),
 		Position = UDim2.new(0, 5),
-		TextColor3 = Color3.fromRGB(160, 100, 255),
+		TextColor3 = Color3.fromRGB(90, 170, 255)
 		Font = Enum.Font.GothamBold,
 		TextXAlignment = "Left",
 		BackgroundTransparency = 1,
@@ -2796,7 +2796,7 @@ end
 		Size = UDim2.new(1, 0, 0, 65),
 		AnchorPoint = Vector2.new(0, 1),
 		Position = UDim2.new(0, 0, 1),
-		BackgroundColor3 = Color3.fromRGB(90, 0, 150)
+		BackgroundColor3 = Color3.fromRGB(0, 80, 160)
 	}), "Frame") Make("Corner", FrameHolder)
 
 	local ImageLabel = Create("ImageLabel", FrameHolder, {
@@ -2810,7 +2810,7 @@ end
 		Size = UDim2.new(1, -52, 0, 15),
 		Position = UDim2.new(0, 44, 0, 7),
 		Font = Enum.Font.GothamBold,
-		TextColor3 = Color3.fromRGB(230, 200, 255),
+		TextColor3 = Color3.fromRGB(220, 235, 255)
 		TextXAlignment = "Left",
 		BackgroundTransparency = 1,
 		TextSize = 10,
@@ -2823,7 +2823,7 @@ end
 		TextWrapped = true,
 		AutomaticSize = "Y",
 		Font = Enum.Font.Gotham,
-		TextColor3 = Color3.fromRGB(190, 150, 255),
+		TextColor3 = Color3.fromRGB(160, 220, 255)
 		TextXAlignment = "Left",
 		BackgroundTransparency = 1,
 		TextSize = 8,
@@ -2837,8 +2837,8 @@ end
 		Text = "دخول",
 		Font = Enum.Font.GothamBold,
 		TextSize = 12,
-		TextColor3 = Color3.fromRGB(240, 220, 255),
-		BackgroundColor3 = Color3.fromRGB(120, 60, 200)
+		TextColor3 = Color3.fromRGB(255, 20, 60)
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255)  
 	}) Make("Corner", JoinButton, UDim.new(0, 5))
 
 	local ClickDelay
@@ -2850,11 +2850,11 @@ end
 		SetProps(JoinButton, {
 			Text = "تم نسخ رابط قروب تلي الى الحافضة",
 			BackgroundColor3 = Color3.fromRGB(90, 40, 150),
-			TextColor3 = Color3.fromRGB(200, 180, 220)
+			TextColor3 = Color3.fromRGB(255, 105, 180)
 		}) task.wait(5)
 		SetProps(JoinButton, {
 			Text = "دخول",
-			BackgroundColor3 = Color3.fromRGB(120, 60, 200),
+			BackgroundColor3 = Color3.fromRGB(255, 20, 60)
 			TextColor3 = Color3.fromRGB(240, 220, 255)
 		}) ClickDelay = false
 	end)
