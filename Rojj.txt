@@ -22,17 +22,17 @@ Themes = {
         ["Color Text"] = Color3.fromRGB(255, 255, 255),
         ["Color Dark Text"] = Color3.fromRGB(255, 200, 230)
     },
-    BRUTON = {  
+    Dark = {  
         ["Color Hub 1"] = ColorSequence.new({
-    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(90, 170, 255)),
-    ColorSequenceKeypoint.new(0.50, Color3.fromRGB(160, 220, 255)),
-    ColorSequenceKeypoint.new(1.00, Color3.fromRGB(90, 170, 255))
+    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(110,110,110)),
+    ColorSequenceKeypoint.new(0.50, Color3.fromRGB(180,180,180)),
+    ColorSequenceKeypoint.new(1.00, Color3.fromRGB(110,110,110))
 }),
-["Color Hub 2"] = Color3.fromRGB(120, 200, 255),
-["Color Stroke"] = Color3.fromRGB(80, 160, 230),
-["Color Theme"] = Color3.fromRGB(10, 18, 30),
-["Color Text"] = Color3.fromRGB(255, 255, 255),
-["Color Dark Text"] = Color3.fromRGB(255, 60, 60)
+["Color Hub 2"] = Color3.fromRGB(160,160,160),
+["Color Stroke"] = Color3.fromRGB(140,140,140),
+["Color Theme"] = Color3.fromRGB(12,12,12),
+["Color Text"] = Color3.fromRGB(230,230,230),
+["Color Dark Text"] = Color3.fromRGB(180,180,180)
     },
 }, 
 
@@ -42,7 +42,7 @@ Themes = {
 	Save = {
     UISize = {550, 380},
     TabSize = 160,
-    Theme = "BRUTON" 
+    Theme = "Dark" 
  },
 	Settings = {},
 	Connection = {},
@@ -1089,7 +1089,7 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
 	})
 })
 local ClickSound = Instance.new("Sound", ScreenGui)
-ClickSound.SoundId = "rbxassetid://99804317239292"
+ClickSound.SoundId = "rbxassetid://"
 ClickSound.Volume = 0.5
 
 local function PlaySound()
@@ -1444,7 +1444,7 @@ local WindowBackground = Create("ImageLabel", MainFrame, {
     Size = UDim2.new(1, 0, 1, 0),
     Position = UDim2.new(0, 0, 0, 0),
     BackgroundTransparency = 1,
-    Image = "rbxassetid://107120100838637", 
+    Image = "rbxassetid://137219915900676", 
     ImageTransparency = 0.2,
     ScaleType = Enum.ScaleType.Crop,
     ZIndex = 0
@@ -1708,14 +1708,7 @@ end
 		AutoButtonColor = false,
 		Name = "Close"
 	})
-	local SettingButton = SetProps(CloseButton:Clone(), {
-    Position = UDim2.new(1, -60, 0.5),
-    Size = UDim2.new(0, 14, 0, 14),
-    Image = "rbxassetid://11385220704",
-    Name = "Settings",
-    Visible = EnableSetting
-    })
-
+	
 	local MinimizeButton = SetProps(CloseButton:Clone(), {
 		Position = UDim2.new(1, -35, 0.5),
 		Image = "rbxassetid://10734896206",
@@ -2769,7 +2762,7 @@ end
 			return TextBox
 		end
 			
-	function Tab:AddDiscordInvite(Configs)  
+	function Tab:AddDiscordInvite(Configs)  -- ننشاء ديسكورد كذا كذا ما بنضيف لاكن نضيفه اذا احتجناه
 	local Title = Configs[1] or Configs.Name or Configs.Title or "Discord"
 	local Desc = Configs.Desc or Configs.Description or ""
 	local Logo = Configs[2] or Configs.Logo or ""
@@ -2784,7 +2777,7 @@ end
 	local InviteLabel = Create("TextLabel", InviteHolder, {
 		Size = UDim2.new(1, 0, 0, 15),
 		Position = UDim2.new(0, 5),
-		TextColor3 = Color3.fromRGB(90, 170, 255)
+		TextColor3 = Color3.fromRGB(160, 100, 255),
 		Font = Enum.Font.GothamBold,
 		TextXAlignment = "Left",
 		BackgroundTransparency = 1,
@@ -2796,7 +2789,7 @@ end
 		Size = UDim2.new(1, 0, 0, 65),
 		AnchorPoint = Vector2.new(0, 1),
 		Position = UDim2.new(0, 0, 1),
-		BackgroundColor3 = Color3.fromRGB(0, 80, 160)
+		BackgroundColor3 = Color3.fromRGB(90, 0, 150)
 	}), "Frame") Make("Corner", FrameHolder)
 
 	local ImageLabel = Create("ImageLabel", FrameHolder, {
@@ -2810,7 +2803,7 @@ end
 		Size = UDim2.new(1, -52, 0, 15),
 		Position = UDim2.new(0, 44, 0, 7),
 		Font = Enum.Font.GothamBold,
-		TextColor3 = Color3.fromRGB(220, 235, 255)
+		TextColor3 = Color3.fromRGB(230, 200, 255),
 		TextXAlignment = "Left",
 		BackgroundTransparency = 1,
 		TextSize = 10,
@@ -2823,7 +2816,7 @@ end
 		TextWrapped = true,
 		AutomaticSize = "Y",
 		Font = Enum.Font.Gotham,
-		TextColor3 = Color3.fromRGB(160, 220, 255)
+		TextColor3 = Color3.fromRGB(190, 150, 255),
 		TextXAlignment = "Left",
 		BackgroundTransparency = 1,
 		TextSize = 8,
@@ -2837,8 +2830,8 @@ end
 		Text = "دخول",
 		Font = Enum.Font.GothamBold,
 		TextSize = 12,
-		TextColor3 = Color3.fromRGB(255, 20, 60)
-		BackgroundColor3 = Color3.fromRGB(255, 255, 255)  
+		TextColor3 = Color3.fromRGB(240, 220, 255),
+		BackgroundColor3 = Color3.fromRGB(120, 60, 200)
 	}) Make("Corner", JoinButton, UDim.new(0, 5))
 
 	local ClickDelay
@@ -2850,11 +2843,11 @@ end
 		SetProps(JoinButton, {
 			Text = "تم نسخ رابط قروب تلي الى الحافضة",
 			BackgroundColor3 = Color3.fromRGB(90, 40, 150),
-			TextColor3 = Color3.fromRGB(255, 105, 180)
+			TextColor3 = Color3.fromRGB(200, 180, 220)
 		}) task.wait(5)
 		SetProps(JoinButton, {
 			Text = "دخول",
-			BackgroundColor3 = Color3.fromRGB(255, 20, 60)
+			BackgroundColor3 = Color3.fromRGB(120, 60, 200),
 			TextColor3 = Color3.fromRGB(240, 220, 255)
 		}) ClickDelay = false
 	end)
