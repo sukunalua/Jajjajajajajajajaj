@@ -1451,7 +1451,7 @@ local WindowBackground = Create("ImageLabel", MainFrame, {
     Size = UDim2.new(1, 0, 1, 0),
     Position = UDim2.new(0, 0, 0, 0),
     BackgroundTransparency = 1,
-    Image = "rbxassetid://137007139553439", 
+    Image = "rbxassetid://118030046856109", 
     ImageTransparency = 0.2,
     ScaleType = Enum.ScaleType.Crop,
     ZIndex = 0
@@ -1550,85 +1550,112 @@ local ParticleContainer = Create("Frame", Containers, {
 	})
 	
 	local ParticleConfig = {
-	MaxParticles = 30,
-	SpawnRate = 0.1,
-	ParticleSize = {Min = 6, Max = 10},
-	ParticleSpeed = {Min = 15, Max = 25},
-	ParticleLifetime = 6
-}
+		MaxParticles = 30,
+		SpawnRate = 0.1,
+		ParticleSize = {Min = 6, Max = 10},
+		ParticleSpeed = {Min = 15, Max = 25},
+		ParticleLifetime = 6
+	}
 
 local ActiveParticles = {}
 local LastSpawn = 0
 
 local function CreateCyberpunkParticle()
 	if #ActiveParticles >= ParticleConfig.MaxParticles then return end
-
+	
 	local containerSize = ParticleContainer.AbsoluteSize
 	local startX = math.random(10, containerSize.X - 10)
 	local startY = containerSize.Y + 20
-
+	
 	local size = math.random(ParticleConfig.ParticleSize.Min, ParticleConfig.ParticleSize.Max)
 	local speed = math.random(ParticleConfig.ParticleSpeed.Min, ParticleConfig.ParticleSpeed.Max)
-
+	
 	local particleColor = Theme["Color Theme"]
-
-	local Particle = Create("ImageLabel", ParticleContainer, {
-		Size = UDim2.fromOffset(size + 6, size + 6),
+	
+	local Particle = Create("Frame", ParticleContainer, {
+		Size = UDim2.fromOffset(size, size),
 		Position = UDim2.fromOffset(startX, startY),
-		Image = "rbxassetid://10723406885",
-		BackgroundTransparency = 1,
-		ImageTransparency = 0.15,
-		ImageColor3 = particleColor,
-		ZIndex = 2
+		BackgroundColor3 = particleColor,
+		BackgroundTransparency = 0.2,
+		BorderSizePixel = 0
 	})
-
+	
+	Create("UICorner", Particle, {
+		CornerRadius = UDim.new(0.5, 0)
+	})
+	
 	local Glow = Create("Frame", Particle, {
-		Size = UDim2.new(1, 10, 1, 10),
+		Size = UDim2.new(1, 6, 1, 6),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		BackgroundColor3 = particleColor,
 		BackgroundTransparency = 0.7,
-		ZIndex = 1
+		ZIndex = -1
 	})
-
-	Create("UICorner", Glow, {CornerRadius = UDim.new(0.5, 0)})
-	Create("UICorner", Particle, {CornerRadius = UDim.new(0.5, 0)})
-
-	table.insert(ActiveParticles, Particle)
-
-	task.spawn(function()
-		local life = 0
-		while life < ParticleConfig.ParticleLifetime do
-			local dt = RunService.Heartbeat:Wait()
-			life = life + dt
-
-			local pos = Particle.Position
-			Particle.Position = pos + UDim2.new(0, 0, 0, -speed * dt)
-			Glow.Position = UDim2.new(0.5, 0, 0.5, 0)
-			Particle.ImageTransparency = 0.15 + life / ParticleConfig.ParticleLifetime
-			Glow.BackgroundTransparency = 0.7 + life / ParticleConfig.ParticleLifetime
-		end
-
-		Particle:Destroy()
-		for i, v in pairs(ActiveParticles) do
-			if v == Particle then
-				table.remove(ActiveParticles, i)
-				break
-			end
-		end
-	end)
+	
+	Create("UICorner", Glow, {
+		CornerRadius = UDim.new(0.5, 0)
+	})
+	
+	local ParticleData = {
+		Frame = Particle,
+		Glow = Glow,
+		StartTime = tick(),
+		Speed = speed,
+		Direction = Vector2.new(0, -speed),
+		OriginalColor = particleColor
+	}
+	
+	Particle.BackgroundTransparency = 1
+	Glow.BackgroundTransparency = 1
+	CreateTween({Particle, "BackgroundTransparency", 0.2, 0.8})
+	CreateTween({Glow, "BackgroundTransparency", 0.7, 0.8})
+	
+	table.insert(ActiveParticles, ParticleData)
 end
 
-task.spawn(function()
-	while true do
-		local dt = RunService.Heartbeat:Wait()
-		LastSpawn = LastSpawn + dt
-		if LastSpawn >= ParticleConfig.SpawnRate then
-			CreateCyberpunkParticle()
-			LastSpawn = 0
+local function UpdateCyberpunkParticles()
+	local containerSize = ParticleContainer.AbsoluteSize
+	
+	for i = #ActiveParticles, 1, -1 do
+		local particle = ActiveParticles[i]
+		local elapsed = tick() - particle.StartTime
+		if elapsed >= ParticleConfig.ParticleLifetime or 
+		   particle.Frame.Position.Y.Offset < -20 then
+
+			CreateTween({particle.Frame, "BackgroundTransparency", 1, 0.5})
+			CreateTween({particle.Glow, "BackgroundTransparency", 1, 0.5})
+			
+			task.spawn(function()
+				task.wait(0.5)
+				if particle.Frame and particle.Frame.Parent then
+					particle.Frame:Destroy()
+				end
+			end)
+			
+			table.remove(ActiveParticles, i)
+		else
+			local currentPos = particle.Frame.Position
+			local newY = currentPos.Y.Offset + particle.Direction.Y * 0.016
+			
+			particle.Frame.Position = UDim2.fromOffset(currentPos.X.Offset, newY)
+			local lifeRatio = elapsed / ParticleConfig.ParticleLifetime
+			if lifeRatio > 0.8 then
+				local fadeAlpha = 0.2 * (1 - ((lifeRatio - 0.8) / 0.2))
+				particle.Frame.BackgroundTransparency = math.max(1 - fadeAlpha, 0.95)
+			end
 		end
 	end
-end)
+end
+
+local function SpawnCyberpunkSystem()
+	if tick() - LastSpawn >= ParticleConfig.SpawnRate and MainFrame.Visible then
+		CreateCyberpunkParticle()
+		LastSpawn = tick()
+	end
+end
+
+
 	local ParticleConnection = RunService.Heartbeat:Connect(function()
 		UpdateCyberpunkParticles()
 		SpawnCyberpunkSystem()
