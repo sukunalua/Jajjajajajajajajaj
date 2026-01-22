@@ -1089,7 +1089,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "Nexus Library V1",
+	Name = "bruton Library V1",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
@@ -1389,7 +1389,7 @@ function redzlib:SetTheme(NewTheme)
 	if not VerifyTheme(NewTheme) then return end
 	
 	redzlib.Save.Theme = NewTheme
-	SaveJson("Nexus library V1.json", redzlib.Save)  -- NEXUS 
+	SaveJson("bruton library V1.json", redzlib.Save)  -- NEXUS 
 	Theme = redzlib.Themes[NewTheme]
 	
 	Comnection:FireConnection("ThemeChanged", NewTheme)
@@ -1412,74 +1412,75 @@ function redzlib:SetTheme(NewTheme)
 	end)
 end
 
-function redzlib:SetScale(NewScale)
-	NewScale = ViewportSize.Y / math.clamp(NewScale, 300, 2000)
-	UIScale, ScreenGui.Scale.Scale = NewScale, NewScale
-end
-
 function redzlib:MakeWindow(Configs)
 	local WTitle = Configs[1] or Configs.Name or Configs.Title or "redz Library V5"
 	local WMiniText = Configs[2] or Configs.SubTitle or "by : redz9999"
 	Settings.ScriptFile = Configs[3] or Configs.SaveFolder or false
-	
+
 	local function LoadFile()
 		local File = Settings.ScriptFile
 		if type(File) ~= "string" then return end
 		if not readfile or not isfile then return end
 		local s, r = pcall(isfile, File)
-		
+
 		if s and r then
 			local s, _Flags = pcall(readfile, File)
-			
 			if s and type(_Flags) == "string" then
 				local s,r = pcall(function() return HttpService:JSONDecode(_Flags) end)
 				Flags = s and r or {}
 			end
 		end
-	end;LoadFile()
-	
+	end; LoadFile()
+
 	local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
-    Size = UDim2.fromOffset(UISizeX, UISizeY),
-    Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
-    BackgroundTransparency = 1,
-    Name = "Hub"
-}), "Main")
+		Size = UDim2.fromOffset(UISizeX, UISizeY),
+		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
+		BackgroundTransparency = 1,
+		Name = "Hub"
+	}), "Main")
 
-local WindowBackground = Create("ImageLabel", MainFrame, {
-    Name = "WindowBackground",
-    Size = UDim2.new(1, 0, 1, 0),
-    Position = UDim2.new(0, 0, 0, 0),
-    BackgroundTransparency = 1,
-    Image = "rbxassetid://118030046856109", 
-    ImageTransparency = 0.2,
-    ScaleType = Enum.ScaleType.Crop,
-    ZIndex = 0
-})
-Make("Corner", WindowBackground)
+	local WindowBackground = Create("ImageLabel", MainFrame, {
+		Name = "WindowBackground",
+		Size = UDim2.new(1, 0, 1, 0),
+		Position = UDim2.new(0, 0, 0, 0),
+		BackgroundTransparency = 1,
+		Image = "rbxassetid://118030046856109",
+		ImageTransparency = 0.2,
+		ScaleType = Enum.ScaleType.Crop,
+		ZIndex = 0
+	})
+	Make("Corner", WindowBackground)
+	Make("Gradient", MainFrame, {Rotation = 45})
+	MakeDrag(MainFrame)
+	local MainCorner = Make("Corner", MainFrame)
 
-Make("Gradient", MainFrame, {
-    Rotation = 45
-})
-MakeDrag(MainFrame)
+	-- حواف تتوهج للواجهة
+	local MainStroke = Instance.new("UIStroke")
+	MainStroke.Thickness = 2
+	MainStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	MainStroke.Parent = MainFrame
 
-local MainCorner = Make("Corner", MainFrame)
+	task.spawn(function()
+		while MainStroke and MainStroke.Parent do
+			local t = tick() * 0.5
+			local r = math.sin(t) * 0.5 + 0.5
+			local g = math.sin(t + 2) * 0.5 + 0.5
+			local b = math.sin(t + 4) * 0.5 + 0.5
+			MainStroke.Color = Color3.new(r, g, b)
+			task.wait()
+		end
+	end)
 
-local Components = Create("Folder", MainFrame, {
-    Name = "Components"
-})
-
-local DropdownHolder = Create("Folder", ScreenGui, {
-    Name = "Dropdown"
-})
-
+	local Components = Create("Folder", MainFrame, {Name = "Components"})
+	local DropdownHolder = Create("Folder", ScreenGui, {Name = "Dropdown"})
 
 	local TopBar = Create("Frame", Components, {
 		Size = UDim2.new(1, 0, 0, 28),
 		BackgroundTransparency = 1,
 		Name = "Top Bar"
 	})
-	
+
 	local Title = InsertTheme(Create("TextLabel", TopBar, {
 		Position = UDim2.new(0, 15, 0.5),
 		AnchorPoint = Vector2.new(0, 0.5),
@@ -1507,7 +1508,7 @@ local DropdownHolder = Create("Folder", ScreenGui, {
 			Name = "SubTitle"
 		}), "DarkText")
 	}), "Text")
-	
+
 	local MainScroll = InsertTheme(Create("ScrollingFrame", Components, {
 		Size = UDim2.new(0, redzlib.Save.TabSize, 1, -TopBar.Size.Y.Offset),
 		ScrollBarImageColor3 = Theme["Color Theme"],
@@ -1527,11 +1528,10 @@ local DropdownHolder = Create("Folder", ScreenGui, {
 			PaddingRight = UDim.new(0, 10),
 			PaddingTop = UDim.new(0, 10),
 			PaddingBottom = UDim.new(0, 10)
-		}), Create("UIListLayout", {
-			Padding = UDim.new(0, 5)
-		})
+		}), 
+		Create("UIListLayout", {Padding = UDim.new(0, 5)})
 	}), "ScrollBar")
-	
+end
 	local Containers = Create("Frame", Components, {
 		Size = UDim2.new(1, -MainScroll.Size.X.Offset, 1, -TopBar.Size.Y.Offset),
 		AnchorPoint = Vector2.new(1, 1),
