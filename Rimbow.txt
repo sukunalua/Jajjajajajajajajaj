@@ -2045,30 +2045,52 @@ function Window:MakeTab(paste, Configs)
 			return Section
 		end
 		function Tab:AddParagraph(Configs)
-			local PName = Configs[1] or Configs.Title or "Paragraph"
-			local PDesc = Configs[2] or Configs.Text or ""
-			
-			local Frame, LabelFunc = ButtonFrame(Container, PName, PDesc, UDim2.new(1, -20))
-			
-			local Paragraph = {}
-			function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
-			function Paragraph:Destroy() Frame:Destroy() end
-			function Paragraph:SetTitle(Val)
-				LabelFunc:SetTitle(GetStr(Val))
-			end
-			function Paragraph:SetDesc(Val)
-				LabelFunc:SetDesc(GetStr(Val))
-			end
-			function Paragraph:Set(Val1, Val2)
-				if Val1 and Val2 then
-					LabelFunc:SetTitle(GetStr(Val1))
-					LabelFunc:SetDesc(GetStr(Val2))
-				elseif Val1 then
-					LabelFunc:SetDesc(GetStr(Val1))
+	local PName = Configs[1] or Configs.Title or "Paragraph"
+	local PDesc = Configs[2] or Configs.Text or ""
+	
+	local Frame, LabelFunc = ButtonFrame(Container, PName, PDesc, UDim2.new(1, -20))
+
+	Frame.BackgroundTransparency = 1
+
+	local Paragraph = {}
+
+	local TextLabels = {LabelFunc.TitleLabel, LabelFunc.DescLabel}
+	
+	task.spawn(function()
+		while Frame and Frame.Parent do
+			local t = tick() * 0.5
+			local r = math.sin(t) * 0.5 + 0.5
+			local g = math.sin(t + 2) * 0.5 + 0.5
+			local b = math.sin(t + 4) * 0.5 + 0.5
+			local Color = Color3.new(r, g, b)
+			for _, lbl in pairs(TextLabels) do
+				if lbl then
+					lbl.TextColor3 = Color
 				end
 			end
-			return Paragraph
+			task.wait()
 		end
+	end)
+
+	function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
+	function Paragraph:Destroy() Frame:Destroy() end
+	function Paragraph:SetTitle(Val)
+		LabelFunc:SetTitle(GetStr(Val))
+	end
+	function Paragraph:SetDesc(Val)
+		LabelFunc:SetDesc(GetStr(Val))
+	end
+	function Paragraph:Set(Val1, Val2)
+		if Val1 and Val2 then
+			LabelFunc:SetTitle(GetStr(Val1))
+			LabelFunc:SetDesc(GetStr(Val2))
+		elseif Val1 then
+			LabelFunc:SetDesc(GetStr(Val1))
+		end
+	end
+
+	return Paragraph
+end
 		function Tab:AddButton(Configs)
 			local BName = Configs[1] or Configs.Name or Configs.Title or "Button!"
 			local BDescription = Configs.Desc or Configs.Description or ""
