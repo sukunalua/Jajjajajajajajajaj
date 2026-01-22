@@ -2068,10 +2068,17 @@ function Paragraph:Set(Val1, Val2)
 	end
 end
 
+local ParaStrokeFrame = Create("Frame", Frame.Parent, {
+	Size = UDim2.new(1, 0, 1, 0),
+	Position = Frame.Position,
+	BackgroundTransparency = 1,
+	ZIndex = Frame.ZIndex - 1
+})
+
 local ParaStroke = Instance.new("UIStroke")
-ParaStroke.Thickness = 2
+ParaStroke.Thickness = 3
 ParaStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-ParaStroke.Parent = Frame
+ParaStroke.Parent = ParaStrokeFrame
 
 task.spawn(function()
 	while ParaStroke and ParaStroke.Parent do
