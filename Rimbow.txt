@@ -1879,50 +1879,63 @@ end
 	end
 	
 	local ContainerList = {}
-	function Window:MakeTab(paste, Configs)
-		if type(paste) == "table" then Configs = paste end
-		local TName = Configs[1] or Configs.Title or "Tab!"
-		local TIcon = Configs[2] or Configs.Icon or ""
-		
-		TIcon = redzlib:GetIcon(TIcon)
-		if not TIcon:find("rbxassetid://") or TIcon:gsub("rbxassetid://", ""):len() < 6 then
-			TIcon = false
+function Window:MakeTab(paste, Configs)
+	if type(paste) == "table" then Configs = paste end
+	local TName = Configs[1] or Configs.Title or "Tab!"
+	local TIcon = Configs[2] or Configs.Icon or ""
+	
+	TIcon = redzlib:GetIcon(TIcon)
+	if not TIcon:find("rbxassetid://") or TIcon:gsub("rbxassetid://", ""):len() < 6 then
+		TIcon = false
+	end
+	
+	local TabSelect = Make("Button", MainScroll, {Size = UDim2.new(1, 0, 0, 24)})Make("Corner", TabSelect)
+	
+	local LabelTitle = InsertTheme(Create("TextLabel", TabSelect, {
+		Size = UDim2.new(1, TIcon and -25 or -15, 1),
+		Position = UDim2.fromOffset(TIcon and 25 or 15),
+		BackgroundTransparency = 1,
+		Font = Enum.Font.GothamMedium,
+		Text = TName,
+		TextColor3 = Theme["Color Text"],
+		TextSize = 10,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextTransparency = (FirstTab and 0.3) or 0,
+		TextTruncate = "AtEnd"
+	}), "Text")
+	
+	local LabelIcon = InsertTheme(Create("ImageLabel", TabSelect, {
+		Position = UDim2.new(0, 8, 0.5),
+		Size = UDim2.new(0, 13, 0, 13),
+		AnchorPoint = Vector2.new(0, 0.5),
+		Image = TIcon or "",
+		BackgroundTransparency = 1,
+		ImageTransparency = (FirstTab and 0.3) or 0
+	}), "Text")
+	
+	local Selected = InsertTheme(Create("Frame", TabSelect, {
+		Size = FirstTab and UDim2.new(0, 4, 0, 4) or UDim2.new(0, 4, 0, 13),
+		Position = UDim2.new(0, 1, 0.5),
+		AnchorPoint = Vector2.new(0, 0.5),
+		BackgroundColor3 = Theme["Color Theme"],
+		BackgroundTransparency = FirstTab and 1 or 0
+	}), "Theme")Make("Corner", Selected, UDim.new(0.5, 0))
+	
+	local TabStroke = Instance.new("UIStroke")
+	TabStroke.Thickness = 2
+	TabStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	TabStroke.Parent = TabSelect
+	
+	task.spawn(function()
+		while TabStroke and TabStroke.Parent do
+			local t = tick() * 0.5
+			local r = math.sin(t) * 0.5 + 0.5
+			local g = math.sin(t + 2) * 0.5 + 0.5
+			local b = math.sin(t + 4) * 0.5 + 0.5
+			TabStroke.Color = Color3.new(r, g, b)
+			task.wait()
 		end
-		
-		local TabSelect = Make("Button", MainScroll, {
-			Size = UDim2.new(1, 0, 0, 24)
-		})Make("Corner", TabSelect)
-		
-		local LabelTitle = InsertTheme(Create("TextLabel", TabSelect, {
-			Size = UDim2.new(1, TIcon and -25 or -15, 1),
-			Position = UDim2.fromOffset(TIcon and 25 or 15),
-			BackgroundTransparency = 1,
-			Font = Enum.Font.GothamMedium,
-			Text = TName,
-			TextColor3 = Theme["Color Text"],
-			TextSize = 10,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextTransparency = (FirstTab and 0.3) or 0,
-			TextTruncate = "AtEnd"
-		}), "Text")
-		
-		local LabelIcon = InsertTheme(Create("ImageLabel", TabSelect, {
-			Position = UDim2.new(0, 8, 0.5),
-			Size = UDim2.new(0, 13, 0, 13),
-			AnchorPoint = Vector2.new(0, 0.5),
-			Image = TIcon or "",
-			BackgroundTransparency = 1,
-			ImageTransparency = (FirstTab and 0.3) or 0
-		}), "Text")
-		
-		local Selected = InsertTheme(Create("Frame", TabSelect, {
-			Size = FirstTab and UDim2.new(0, 4, 0, 4) or UDim2.new(0, 4, 0, 13),
-			Position = UDim2.new(0, 1, 0.5),
-			AnchorPoint = Vector2.new(0, 0.5),
-			BackgroundColor3 = Theme["Color Theme"],
-			BackgroundTransparency = FirstTab and 1 or 0
-		}), "Theme")Make("Corner", Selected, UDim.new(0.5, 0))
-		
+	end)
 		local Container = InsertTheme(Create("ScrollingFrame", {
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.new(0, 0, 1),
