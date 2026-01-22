@@ -2047,15 +2047,34 @@ function Window:MakeTab(paste, Configs)
 		function Tab:AddParagraph(Configs)
 	local PName = Configs[1] or Configs.Title or "Paragraph"
 	local PDesc = Configs[2] or Configs.Text or ""
-	
-	local Frame, LabelFunc = ButtonFrame(Container, PName, PDesc, UDim2.new(1, -20))
 
-	Frame.BackgroundTransparency = 1
+	local Frame = Create("Frame", Container, {
+		Size = UDim2.new(1, 0, 0, 20),
+		BackgroundTransparency = 1
+	})
 
-	local Paragraph = {}
+	local TitleLabel = Create("TextLabel", Frame, {
+		Font = Enum.Font.GothamMedium,
+		Text = PName,
+		TextSize = 10,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextColor3 = Color3.fromRGB(255,255,255),
+		BackgroundTransparency = 1,
+		Size = UDim2.new(1, 0, 0, 10),
+		Position = UDim2.new(0, 0, 0, 0)
+	})
 
-	local TextLabels = {LabelFunc.TitleLabel, LabelFunc.DescLabel}
-	
+	local DescLabel = Create("TextLabel", Frame, {
+		Font = Enum.Font.Gotham,
+		Text = PDesc,
+		TextSize = 8,
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextColor3 = Color3.fromRGB(255,255,255),
+		BackgroundTransparency = 1,
+		Size = UDim2.new(1, 0, 0, 10),
+		Position = UDim2.new(0, 0, 0, 12)
+	})
+
 	task.spawn(function()
 		while Frame and Frame.Parent do
 			local t = tick() * 0.5
@@ -2063,29 +2082,27 @@ function Window:MakeTab(paste, Configs)
 			local g = math.sin(t + 2) * 0.5 + 0.5
 			local b = math.sin(t + 4) * 0.5 + 0.5
 			local Color = Color3.new(r, g, b)
-			for _, lbl in pairs(TextLabels) do
-				if lbl then
-					lbl.TextColor3 = Color
-				end
-			end
+			TitleLabel.TextColor3 = Color
+			DescLabel.TextColor3 = Color
 			task.wait()
 		end
 	end)
 
+	local Paragraph = {}
 	function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
 	function Paragraph:Destroy() Frame:Destroy() end
 	function Paragraph:SetTitle(Val)
-		LabelFunc:SetTitle(GetStr(Val))
+		TitleLabel.Text = GetStr(Val)
 	end
 	function Paragraph:SetDesc(Val)
-		LabelFunc:SetDesc(GetStr(Val))
+		DescLabel.Text = GetStr(Val)
 	end
 	function Paragraph:Set(Val1, Val2)
 		if Val1 and Val2 then
-			LabelFunc:SetTitle(GetStr(Val1))
-			LabelFunc:SetDesc(GetStr(Val2))
+			TitleLabel.Text = GetStr(Val1)
+			DescLabel.Text = GetStr(Val2)
 		elseif Val1 then
-			LabelFunc:SetDesc(GetStr(Val1))
+			DescLabel.Text = GetStr(Val1)
 		end
 	end
 
