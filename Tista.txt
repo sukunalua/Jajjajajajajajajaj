@@ -1,0 +1,3195 @@
+
+game:GetService("MarketplaceService")
+
+local vu1 = game:GetService("UserInputService")
+local vu2 = game:GetService("TweenService")
+local vu3 = game:GetService("HttpService")
+local vu4 = game:GetService("RunService")
+local vu5 = game:GetService("CoreGui")
+local vu6 = game:GetService("Players").LocalPlayer
+
+vu6:GetMouse()
+
+local vu7 = {
+	Themes = {
+		Darker = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(25, 25, 25)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(32.5, 32.5, 32.5)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 25)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
+			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+			["Color Theme"] = Color3.fromRGB(88, 101, 242),
+			["Color Text"] = Color3.fromRGB(243, 243, 243),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+		},
+		Dark = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(40, 40, 40)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(47.5, 47.5, 47.5)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 40, 40)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(45, 45, 45),
+			["Color Stroke"] = Color3.fromRGB(65, 65, 65),
+			["Color Theme"] = Color3.fromRGB(65, 150, 255),
+			["Color Text"] = Color3.fromRGB(245, 245, 245),
+			["Color Dark Text"] = Color3.fromRGB(190, 190, 190),
+		},
+		Purple = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(27.5, 25, 30)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(32.5, 32.5, 32.5)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(27.5, 25, 30)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
+			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+			["Color Theme"] = Color3.fromRGB(150, 0, 255),
+			["Color Text"] = Color3.fromRGB(240, 240, 240),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+		},
+		red = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(199, 32, 32)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(199, 32, 32)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 25, 25)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
+			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+			["Color Theme"] = Color3.fromRGB(150, 0, 255),
+			["Color Text"] = Color3.fromRGB(240, 240, 240),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+		},
+		GoldenDark = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(163, 130, 10)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 217, 128)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(201, 160, 34)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(25, 25, 25),
+			["Color Stroke"] = Color3.fromRGB(45, 45, 45),
+			["Color Theme"] = Color3.fromRGB(255, 215, 0),
+			["Color Text"] = Color3.fromRGB(255, 255, 255),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+		},
+		AzureGlow = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(23, 10, 163)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(66, 76, 189)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(21, 166, 214)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(30, 19, 97),
+			["Color Stroke"] = Color3.fromRGB(45, 45, 45),
+			["Color Theme"] = Color3.fromRGB(255, 215, 0),
+			["Color Text"] = Color3.fromRGB(255, 255, 255),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+		},
+		MidnightGold = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(10, 32, 46)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(10, 32, 46)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(10, 32, 46)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(14, 46, 66),
+			["Color Stroke"] = Color3.fromRGB(14, 36, 50),
+			["Color Theme"] = Color3.fromRGB(238, 161, 16),
+			["Color Text"] = Color3.fromRGB(255, 255, 255),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+		},
+		NightGlow = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(25, 25, 25)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(32.5, 32.5, 32.5)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 25)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
+			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+			["Color Theme"] = Color3.fromRGB(242, 224, 22),
+			["Color Text"] = Color3.fromRGB(243, 243, 243),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+		},
+		CelestialRift = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(49, 214, 195)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(32.5, 32.5, 32.5)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(49, 42, 176)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(28, 27, 27),
+			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+			["Color Theme"] = Color3.fromRGB(245, 2, 2),
+			["Color Text"] = Color3.fromRGB(243, 243, 243),
+			["Color Dark Text"] = Color3.fromRGB(44, 209, 44),
+		},
+		QuantumGlow = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 128, 255)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(102, 0, 204)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 128)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(20, 20, 20),
+			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+			["Color Theme"] = Color3.fromRGB(255, 255, 255),
+			["Color Text"] = Color3.fromRGB(255, 255, 255),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+		},
+		QuantumGlowGreen = {
+			["Color Hub 1"] = ColorSequence.new({  
+            ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 170, 90)),  
+            ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 140, 75)),  
+            ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 90))  
+        }),  
+        ["Color Hub 2"] = Color3.fromRGB(0, 170, 90),  
+        ["Color Stroke"] = Color3.fromRGB(0, 120, 60),  
+        ["Color Theme"] = Color3.fromRGB(0, 0, 0),  
+        ["Color Text"] = Color3.fromRGB(10, 10, 10),  
+        ["Color Dark Text"] = Color3.fromRGB(5, 5, 5)
+		},
+		Orange = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(199, 38, 38)),
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(199, 38, 38)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(70, 40, 0)),
+			}),
+			["Color Hub 2"] = Color3.fromRGB(188, 123, 0),
+			["Color Stroke"] = Color3.fromRGB(200, 130, 0),
+			["Color Theme"] = Color3.fromRGB(165, 106, 0),
+			["Color Text"] = Color3.fromRGB(243, 243, 243),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+		},
+	},
+	Info = {
+		Version = "1.1.0",
+	},
+	Save = {
+		UISize = {
+			500,
+			280,
+		},
+		TabSize = 160,
+		Theme = "QuantumGlowGreen",
+	},
+	Settings = {},
+	Connection = {},
+	Instances = {},
+	Elements = {},
+	Options = {},
+	Flags = {},
+	Tabs = {},
+	Icons = loadstring(game:HttpGet("https://pastebin.com/raw/EnEUH9b2"))(),
+}
+local vu8 = workspace.CurrentCamera.ViewportSize
+local vu9 = vu8.Y / 450
+local vu10 = vu7.Settings
+local vu11 = vu7.Flags
+
+local function vu14(P12, P13)
+	table.insert(vu7.Instances, {
+		Instance = P12,
+		Type = P13,
+	})
+
+	return P12
+end
+local function vu18(Pu15, P16)
+	if P16 then
+		table.foreach(P16, function(_, P17)
+			P17.Parent = Pu15
+		end)
+	end
+
+	return Pu15
+end
+local function vu23(Pu19, P20)
+	if P20 then
+		table.foreach(P20, function(P21, P22)
+			Pu19[P21] = P22
+		end)
+	end
+
+	return Pu19
+end
+local function vu26(...)
+	local v24 = {
+		...,
+	}
+
+	if type(v24) == "table" then
+		local v25 = Instance.new(v24[1])
+
+		if type(v24[2]) ~= "table" then
+			if typeof(v24[2]) == "Instance" then
+				v25.Parent = v24[2]
+
+				vu23(v25, v24[3])
+				vu18(v25, v24[4])
+
+				local _ = v24[4]
+			end
+		else
+			vu23(v25, v24[2])
+			vu18(v25, v24[3])
+
+			local _ = v24[3]
+		end
+
+		return v25
+	end
+end
+
+local vu27 = "bruton_lib-Notification"
+local vu28 = "NotifContainer"
+local vu29 = "brutonNotif_lib"
+local vu30 = 70
+
+function vu7.CreateNotification(_, P31)
+	local v32 = P31.Title or "Notification"
+	local v33 = P31.Content or ""
+	local v34 = P31.Icon or "rbxassetid://10709775560"
+	local vu35 = P31.Callback or function() end
+	local vu36 = P31.Duration or 5
+	local v37 = vu5:FindFirstChild(vu27)
+
+	if v37 then
+		v37.DisplayOrder = 999
+	else
+		v37 = Instance.new("ScreenGui")
+		v37.Name = vu27
+		v37.ResetOnSpawn = false
+		v37.DisplayOrder = 999
+		v37.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		v37.Parent = vu5
+
+		local v38 = Instance.new("Frame")
+
+		v38.Name = vu28
+		v38.Size = UDim2.new(0, 240, 1, 0)
+		v38.Position = UDim2.new(1, -260, 0.05, 0)
+		v38.BackgroundTransparency = 1
+		v38.Parent = v37
+	end
+
+	local vu39 = v37[vu28]
+
+	local function vu48()
+		local v40 = vu39
+		local v41, v42, v43 = ipairs(v40:GetChildren())
+		local v44 = 0
+
+		while true do
+			local v45
+
+			v43, v45 = v41(v42, v43)
+
+			if v43 == nil then
+				break
+			end
+			if v45.Name == vu29 then
+				v44 = v44 + 1
+
+				local v46 = vu2
+				local v47 = {
+					Position = UDim2.new(0, 0, 0, (v44 - 1) * vu30),
+				}
+
+				v46:Create(v45, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), v47):Play()
+			end
+		end
+	end
+
+	local vu49 = Instance.new("Frame")
+
+	vu49.Name = vu29
+	vu49.Size = UDim2.new(0, 220, 0, 60)
+	vu49.Position = UDim2.new(1, 0, 0, 0)
+	vu49.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	vu49.BorderSizePixel = 0
+	vu49.ClipsDescendants = true
+
+	local v50 = Instance.new("UICorner")
+
+	v50.CornerRadius = UDim.new(0, 8)
+	v50.Parent = vu49
+
+	local v51 = Instance.new("UIGradient")
+
+	v51.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 128, 255)),
+		ColorSequenceKeypoint.new(0.5, Color3.fromRGB(102, 0, 204)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 128)),
+	})
+	v51.Rotation = 45
+	v51.Parent = vu49
+
+	local v52 = Instance.new("UIStroke")
+
+	v52.Color = Color3.fromRGB(255, 255, 255)
+	v52.Thickness = 1
+	v52.Transparency = 0.7
+	v52.Parent = vu49
+
+	local v53 = Instance.new("ImageLabel")
+
+	v53.Size = UDim2.new(0, 20, 0, 20)
+	v53.Position = UDim2.new(0, 8, 0, 20)
+	v53.BackgroundTransparency = 1
+	v53.Image = v34
+	v53.Parent = vu49
+
+	local v54 = Instance.new("TextLabel")
+
+	v54.Size = UDim2.new(1, -50, 0, 16)
+	v54.Position = UDim2.new(0, 36, 0, 4)
+	v54.BackgroundTransparency = 1
+	v54.Text = v32
+	v54.Font = Enum.Font.GothamBold
+	v54.TextSize = 13
+	v54.TextColor3 = Color3.fromRGB(255, 255, 255)
+	v54.TextXAlignment = Enum.TextXAlignment.Left
+	v54.TextWrapped = true
+	v54.Parent = vu49
+
+	local v55 = Instance.new("TextLabel")
+
+	v55.Size = UDim2.new(1, -50, 0, 28)
+	v55.Position = UDim2.new(0, 36, 0, 22)
+	v55.BackgroundTransparency = 1
+	v55.Text = v33
+	v55.Font = Enum.Font.Gotham
+	v55.TextSize = 12
+	v55.TextColor3 = Color3.fromRGB(255, 255, 255)
+	v55.TextWrapped = true
+	v55.TextXAlignment = Enum.TextXAlignment.Left
+	v55.TextYAlignment = Enum.TextYAlignment.Top
+	v55.Parent = vu49
+
+	local v56 = Instance.new("TextButton")
+
+	v56.Size = UDim2.new(0, 18, 0, 18)
+	v56.Position = UDim2.new(1, -24, 0, 4)
+	v56.BackgroundTransparency = 1
+	v56.Text = "X"
+	v56.Font = Enum.Font.GothamBold
+	v56.TextSize = 14
+	v56.TextColor3 = Color3.fromRGB(255, 150, 150)
+	v56.Parent = vu49
+
+	local vu57 = Instance.new("Frame")
+
+	vu57.Size = UDim2.new(1, -6, 0, 3)
+	vu57.Position = UDim2.new(0, 3, 1, -6)
+	vu57.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	vu57.BackgroundTransparency = 0.35
+	vu57.BorderSizePixel = 0
+	vu57.Parent = vu49
+
+	local v58 = Instance.new("UICorner")
+
+	v58.CornerRadius = UDim.new(0, 2)
+	v58.Parent = vu57
+	vu49.Parent = vu39
+
+	vu48()
+	v56.MouseButton1Click:Connect(function()
+		vu2:Create(vu49, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+			Position = UDim2.new(1, 0, vu49.Position.Y.Scale, vu49.Position.Y.Offset),
+		}):Play()
+		task.wait(0.4)
+		vu49:Destroy()
+		vu48()
+		vu35()
+	end)
+	task.spawn(function()
+		local v59 = tick()
+
+		while tick() - v59 < vu36 do
+			if not vu49.Parent then
+				return
+			end
+
+			local v60 = 1 - (tick() - v59) / vu36
+
+			vu57.Size = UDim2.new(v60, -6, 0, 3)
+
+			vu4.RenderStepped:Wait()
+		end
+
+		if vu49.Parent then
+			vu2:Create(vu49, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+				Position = UDim2.new(1, 0, vu49.Position.Y.Scale, vu49.Position.Y.Offset),
+			}):Play()
+			task.wait(0.4)
+			vu49:Destroy()
+			vu48()
+			vu35()
+		end
+	end)
+end
+
+local function v63(P61)
+	if readfile and (isfile and isfile(P61)) then
+		local v62 = vu3:JSONDecode(readfile(P61))
+
+		if type(v62) == "table" then
+			if rawget(v62, "UISize") then
+				vu7.Save.UISize = v62.UISize
+			end
+			if rawget(v62, "TabSize") then
+				vu7.Save.TabSize = v62.TabSize
+			end
+			if rawget(v62, "Theme") and VerifyTheme(v62.Theme) then
+				vu7.Save.Theme = v62.Theme
+			end
+		end
+	end
+end
+
+pcall(v63, "bruton hub with bruton library.json")
+
+local vu83 = {
+	InsertCallback = function(_, P64, P65)
+		if type(P65) == "function" then
+			table.insert(P64, P65)
+		end
+
+		return P65
+	end,
+	FireCallback = function(_, P66, ...)
+		local v67, v68, v69 = ipairs(P66)
+
+		while true do
+			local v70
+
+			v69, v70 = v67(v68, v69)
+
+			if v69 == nil then
+				break
+			end
+			if type(v70) == "function" then
+				task.spawn(v70, ...)
+			end
+		end
+	end,
+	ToggleVisible = function(_, P71, P72)
+		if P72 == nil or not P72 then
+			P72 = P71.Visible
+		end
+
+		P71.Visible = P72
+	end,
+	ToggleParent = function(_, P73, P74)
+		if Bool == nil then
+			if P73.Parent then
+				P74 = false
+			end
+
+			P73.Parent = P74
+		else
+			P73.Parent = Bool
+		end
+	end,
+	GetConnectionFunctions = function(_, Pu75, P76)
+		return {
+			Function = P76,
+			Connected = true,
+			Disconnect = function(P77)
+				if P77.Connected then
+					table.remove(Pu75, table.find(Pu75, P77.Function))
+
+					P77.Connected = false
+				end
+			end,
+			Fire = function(P78, ...)
+				if P78.Connected then
+					task.spawn(P78.Function, ...)
+				end
+			end,
+		}
+	end,
+	GetCallback = function(_, P79, P80)
+		local vu81 = P79[P80] or P79.Callback or function() end
+
+		return type(vu81) ~= "table" and {
+			vu81,
+		} or {
+			function(P82)
+				vu81[1][vu81[2]] = P82
+			end,
+		}
+	end,
+}
+local vu84 = {}
+local vu85 = vu7.Connection
+
+local function v96(P86)
+	if type(P86) == "table" then
+		local v87, v88, v89 = ipairs(P86)
+
+		while true do
+			local v90
+
+			v89, v90 = v87(v88, v89)
+
+			if v89 == nil then
+				break
+			end
+
+			local vu91 = {}
+			local v92 = {}
+
+			vu85[v90] = v92
+			vu84[v90] = vu91
+			v92.Name = v90
+
+			function v92.Connect(_, P93)
+				if type(P93) == "function" then
+					table.insert(vu91, P93)
+
+					local _ = vu83.GetConnectionFunctions
+				end
+			end
+			function v92.Once(_, Pu94)
+				if type(Pu94) == "function" then
+					local vu95 = nil
+
+					vu95 = vu83:GetConnectionFunctions(vu91, function(...)
+						task.spawn(Pu94, ...)
+						vu95:Disconnect()
+					end)
+
+					return vu95
+				end
+			end
+		end
+	end
+end
+
+function vu85.FireConnection(_, P97, ...)
+	local v98 = type(P97) == "string" and vu84[P97] or vu84[P97.Name]
+	local v99, v100, v101 = pairs(v98)
+
+	while true do
+		local v102
+
+		v101, v102 = v99(v100, v101)
+
+		if v101 == nil then
+			break
+		end
+
+		task.spawn(v102, ...)
+	end
+end
+
+v96({
+	"FlagsChanged",
+	"ThemeChanged",
+	"FileSaved",
+	"ThemeChanging",
+	"OptionAdded",
+})
+
+local function vu104(P103)
+	return type(P103) == "string" and vu11[P103] ~= nil
+end
+local function vu107(P105)
+	local v106
+
+	if type(P105) ~= "string" then
+		v106 = false
+	else
+		v106 = vu11[P105]
+	end
+
+	return v106
+end
+local function vu110(P108, P109)
+	if P108 and (P109 ~= vu11[P108] or type(P109) == "table") then
+		vu11[P108] = P109
+
+		vu85:FireConnection("FlagsChanged", P108, P109)
+	end
+end
+
+local vu111 = nil
+
+vu85.FlagsChanged:Connect(function(_, _)
+	local v112 = vu10.ScriptFile
+
+	if not vu111 and (v112 and writefile) then
+		vu111 = true
+
+		task.wait(0.1)
+
+		vu111 = false
+
+		local v113, v114 = pcall(function()
+			return vu3:JSONEncode(vu11)
+		end)
+
+		if v113 and pcall(writefile, v112, v114) then
+			vu85:FireConnection("FileSaved", "Script-Flags", v112, v114)
+		end
+	end
+end)
+
+local vu115 = vu26("ScreenGui", vu5, {
+	Name = "bruton hub with bruton library",
+}, {
+	vu26("UIScale", {
+		Scale = vu9,
+		Name = "Scale",
+	}),
+})
+
+local v116 = vu5
+local v117 = vu5.FindFirstChild(v116, vu115.Name)
+
+if v117 and v117 ~= vu115 then
+	v117:Destroy()
+end
+
+local function vu119(P118)
+	local _ = type(P118) ~= "function"
+
+	return P118
+end
+local function vu123(P120, Pu121)
+	P120.InputBegan:Connect(function(P122)
+		if P122.UserInputType == Enum.UserInputType.MouseButton1 or P122.UserInputType == Enum.UserInputType.Touch then
+			while vu1:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+				task.wait()
+			end
+		end
+
+		Pu121()
+	end)
+end
+local function vu131(P124)
+	local v125 = P124[1] or P124.Instance
+	local v126 = P124[2] or P124.Prop
+	local v127 = P124[3] or P124.NewVal
+	local v128 = P124[4] or (P124.Time or 0.5)
+	local v129 = P124[5] or (P124.wait or false)
+	local v130 = vu2:Create(v125, TweenInfo.new(v128, Enum.EasingStyle.Quint), {
+		[v126] = v127,
+	})
+
+	v130:Play()
+
+	if v129 then
+		v130.Completed:Wait()
+	end
+
+	return v130
+end
+local function vu140(Pu132)
+	task.spawn(function()
+		vu23(Pu132, {
+			Active = true,
+			AutoButtonColor = false,
+		})
+
+		local vu133 = nil
+		local vu134 = nil
+		local vu135 = nil
+
+		local function vu138(P136)
+			local v137 = P136.Position - vu133
+
+			vu131({
+				Pu132,
+				"Position",
+				UDim2.new(vu134.X.Scale, vu134.X.Offset + v137.X / vu9, vu134.Y.Scale, vu134.Y.Offset + v137.Y / vu9),
+				0.35,
+			})
+		end
+
+		Pu132.MouseButton1Down:Connect(function()
+			vu135 = true
+		end)
+		Pu132.InputBegan:Connect(function(P139)
+			if
+				P139.UserInputType == Enum.UserInputType.MouseButton1
+				or P139.UserInputType == Enum.UserInputType.Touch
+			then
+				vu134 = Pu132.Position
+				vu133 = P139.Position
+
+				while vu1:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+					vu4.Heartbeat:Wait()
+
+					if vu135 then
+						vu138(P139)
+					end
+				end
+
+				vu135 = false
+			end
+		end)
+	end)
+
+	return Pu132
+end
+local function vu146(P141)
+	local v142, v143, v144 = pairs(vu7.Themes)
+
+	while true do
+		local v145
+
+		v144, v145 = v142(v143, v144)
+
+		if v144 == nil then
+			break
+		end
+		if v144 == P141 then
+			return true
+		end
+	end
+end
+local function vu150(P147, P148)
+	if writefile then
+		local v149 = vu3:JSONEncode(P148)
+
+		writefile(P147, v149)
+	end
+end
+
+local vu151 = vu7.Themes[vu7.Save.Theme]
+
+local function v154(P152, P153)
+	vu7.Elements[P152] = P153
+end
+local function vu158(P155, P156, P157, ...)
+	return vu7.Elements[P155](P156, P157, ...)
+end
+
+v154("Corner", function(P159, P160)
+	return vu23(
+		vu26("UICorner", P159, {
+			CornerRadius = P160 or UDim.new(0, 15),
+		}),
+		props
+	)
+end)
+v154("Stroke", function(P161, P162, ...)
+	local v163 = {
+		...,
+	}
+
+	return vu14(
+		vu23(
+			vu26("UIStroke", P161, {
+				Color = v163[1] or vu151["Color Stroke"],
+				Thickness = v163[2] or 1,
+				ApplyStrokeMode = "Border",
+			}),
+			P162
+		),
+		"Stroke"
+	)
+end)
+v154("Button", function(P164, P165, ...)
+	local v166 = {
+		...,
+	}
+	local vu167 = vu14(
+		vu23(
+			vu26("TextButton", P164, {
+				Text = "",
+				Size = UDim2.fromScale(1, 1),
+				BackgroundColor3 = vu151["Color Hub 2"],
+				AutoButtonColor = false,
+			}),
+			P165
+		),
+		"Frame"
+	)
+
+	vu167.MouseEnter:Connect(function()
+		vu167.BackgroundTransparency = 0.4
+	end)
+	vu167.MouseLeave:Connect(function()
+		vu167.BackgroundTransparency = 0
+	end)
+
+	if v166[1] then
+		vu167.Activated:Connect(v166[1])
+	end
+
+	return vu167
+end)
+v154("Gradient", function(P168, P169, ...)
+	return vu14(
+		vu23(
+			vu26("UIGradient", P168, {
+				Color = vu151["Color Hub 1"],
+			}),
+			P169
+		),
+		"Gradient"
+	)
+end)
+
+local function vu180(P170, P171, P172, P173)
+	local vu174 = vu14(
+		vu26("TextLabel", {
+			Font = Enum.Font.GothamMedium,
+			TextColor3 = vu151["Color Text"],
+			Size = UDim2.new(1, -20),
+			AutomaticSize = "Y",
+			Position = UDim2.new(0, 0, 0.5),
+			AnchorPoint = Vector2.new(0, 0.5),
+			BackgroundTransparency = 1,
+			TextTruncate = "AtEnd",
+			TextSize = 10,
+			TextXAlignment = "Left",
+			Text = "",
+			RichText = true,
+		}),
+		"Text"
+	)
+	local vu175 = vu14(
+		vu26("TextLabel", {
+			Font = Enum.Font.Gotham,
+			TextColor3 = vu151["Color Dark Text"],
+			Size = UDim2.new(1, -20),
+			AutomaticSize = "Y",
+			Position = UDim2.new(0, 12, 0, 15),
+			BackgroundTransparency = 1,
+			TextWrapped = true,
+			TextSize = 8,
+			TextXAlignment = "Left",
+			Text = "",
+			RichText = true,
+		}),
+		"DarkText"
+	)
+	local v176 = vu158("Button", P170, {
+		Size = UDim2.new(1, 0, 0, 25),
+		AutomaticSize = "Y",
+		Name = "Option",
+	})
+
+	vu158("Corner", v176, UDim.new(0, 6))
+
+	LabelHolder = vu26("Frame", v176, {
+		AutomaticSize = "Y",
+		BackgroundTransparency = 1,
+		Size = P173,
+		Position = UDim2.new(0, 10, 0),
+		AnchorPoint = Vector2.new(0, 0),
+	}, {
+		vu26("UIListLayout", {
+			SortOrder = "LayoutOrder",
+			VerticalAlignment = "Center",
+			Padding = UDim.new(0, 2),
+		}),
+		vu26("UIPadding", {
+			PaddingBottom = UDim.new(0, 5),
+			PaddingTop = UDim.new(0, 5),
+		}),
+		vu174,
+		vu175,
+	})
+
+	local v179 = {
+		SetTitle = function(_, P177)
+			if type(P177) == "string" and P177:gsub(" ", ""):len() > 0 then
+				vu174.Text = P177
+			end
+		end,
+		SetDesc = function(_, P178)
+			if type(P178) ~= "string" or P178:gsub(" ", ""):len() <= 0 then
+				vu175.Visible = false
+				vu175.Text = ""
+				LabelHolder.Position = UDim2.new(0, 10, 0.5)
+				LabelHolder.AnchorPoint = Vector2.new(0, 0.5)
+			else
+				vu175.Visible = true
+				vu175.Text = P178
+				LabelHolder.Position = UDim2.new(0, 10, 0)
+				LabelHolder.AnchorPoint = Vector2.new(0, 0)
+			end
+		end,
+	}
+
+	v179:SetTitle(P171)
+	v179:SetDesc(P172)
+
+	return v176, v179
+end
+local function vu182(P181)
+	return P181:IsA("Frame") and "BackgroundColor3"
+		or (
+			P181:IsA("ImageLabel") and "ImageColor3"
+			or (
+				P181:IsA("TextLabel") and "TextColor3"
+				or (P181:IsA("ScrollingFrame") and "ScrollBarImageColor3" or (P181:IsA("UIStroke") and "Color" or ""))
+			)
+		)
+end
+
+function vu7.GetIcon(_, P183)
+	if P183:find("rbxassetid://") or P183:len() < 1 then
+		return P183
+	end
+
+	local v184 = P183:lower():gsub("lucide", ""):gsub("-", "")
+	local v185, v186, v187 = pairs(vu7.Icons)
+
+	while true do
+		local v188
+
+		v187, v188 = v185(v186, v187)
+
+		if v187 == nil then
+			break
+		end
+		if v187:gsub("lucide", ""):gsub("-", "") == v184 then
+			return v188
+		end
+	end
+
+	local v189, v190, v191 = pairs(vu7.Icons)
+
+	while true do
+		local v192
+
+		v191, v192 = v189(v190, v191)
+
+		if v191 == nil then
+			break
+		end
+		if v191:gsub("lucide", ""):gsub("-", ""):find(v184) then
+			return v192
+		end
+	end
+
+	return v184
+end
+function vu7.SetTheme(_, P193)
+	if vu146(P193) then
+		vu7.Save.Theme = P193
+
+		vu150("bruton hub with bruton library.json", vu7.Save)
+
+		vu151 = vu7.Themes[P193]
+
+		Comnection:FireConnection("ThemeChanged", P193)
+		table.foreach(vu7.Instances, function(_, P194)
+			if P194.Type ~= "Gradient" then
+				if P194.Type ~= "Frame" then
+					if P194.Type ~= "Stroke" then
+						if P194.Type ~= "Theme" then
+							if P194.Type ~= "Text" then
+								if P194.Type ~= "DarkText" then
+									if P194.Type == "ScrollBar" then
+										P194.Instance[vu182(P194.Instance)] = vu151["Color Theme"]
+									end
+								else
+									P194.Instance[vu182(P194.Instance)] = vu151["Color Dark Text"]
+								end
+							else
+								P194.Instance[vu182(P194.Instance)] = vu151["Color Text"]
+							end
+						else
+							P194.Instance[vu182(P194.Instance)] = vu151["Color Theme"]
+						end
+					else
+						P194.Instance[vu182(P194.Instance)] = vu151["Color Stroke"]
+					end
+				else
+					P194.Instance.BackgroundColor3 = vu151["Color Hub 2"]
+				end
+			else
+				P194.Instance.Color = vu151["Color Hub 1"]
+			end
+		end)
+	end
+end
+function vu7.SetScale(_, P195)
+	local v196 = vu8.Y / math.clamp(P195, 300, 2000)
+
+	vu115.Scale.Scale = v196
+	vu9 = v196
+end
+function vu7.MakeWindow(_, P197)
+	local v198 = P197[1] or P197.Name or (P197.Title or "bruton hub with bruton library")
+	local v199 = P197[2] or (P197.SubTitle or "by : bruton_Team")
+
+	vu10.ScriptFile = P197[3] or (P197.SaveFolder or false)
+
+	local v200, v201 = unpack(vu7.Save.UISize)
+	local vu202 = vu14(
+		vu26("ImageButton", vu115, {
+			Size = UDim2.fromOffset(v200, v201),
+			Position = UDim2.new(0.5, -v200 / 2, 0.5, -v201 / 2),
+			BackgroundTransparency = 0.15,
+			Name = "Hub",
+		}),
+		"Main"
+	)
+    local WindowBackground = Create("ImageLabel", MainFrame, {
+    Name = "WindowBackground",
+    Size = UDim2.new(1, 0, 1, 0),
+    Position = UDim2.new(0, 0, 0, 0),
+    BackgroundTransparency = 1,
+    Image = "rbxassetid://137219915900676", 
+    ImageTransparency = 0.2,
+    ScaleType = Enum.ScaleType.Crop,
+    ZIndex = 0
+    })
+Make("Corner", WindowBackground)
+    
+	vu158("Gradient", vu202, {
+		Rotation = 45,
+	})
+	vu140(vu202)
+
+	local vu203 = vu158("Corner", vu202)
+	local v204 = vu26("Folder", vu202, {
+		Name = "Components",
+	})
+	local vu205 = vu26("Folder", vu115, {
+		Name = "Dropdown",
+	})
+	local vu206 = vu26("Frame", v204, {
+		Size = UDim2.new(1, 0, 0, 28),
+		BackgroundTransparency = 1,
+		Name = "Top Bar",
+	})
+	local vu207 = vu14(
+		vu26("TextLabel", vu206, {
+			Position = UDim2.new(0, 15, 0, 5),
+			AutomaticSize = "XY",
+			Text = v198,
+			TextXAlignment = "Left",
+			TextSize = 12,
+			TextColor3 = vu151["Color Text"],
+			BackgroundTransparency = 1,
+			Font = Enum.Font.GothamBold,
+			Name = "Title",
+		}),
+		"Text"
+	)
+	local vu208 = vu14(
+		vu26("TextLabel", vu206, {
+			Position = UDim2.new(0, 15, 0, vu207.TextBounds.Y + 7),
+			AutomaticSize = "XY",
+			Text = v199,
+			TextColor3 = Color3.fromRGB(255, 255, 255),
+			BackgroundTransparency = 1,
+			TextXAlignment = "Left",
+			TextSize = 8,
+			Font = Enum.Font.Gotham,
+			Name = "SubTitle",
+		}),
+		"DarkText"
+	)
+	local v209 = P197.GlowSub or "👻 BRUTON HUB BROOKHAVEN RP 👻 "
+	local v210 = P197.GlowSubColor or Color3.fromRGB(3, 255, 99)
+	local v211 = P197.GlowSubTitleColor or Color3.fromRGB(0, 0, 0)
+	local vu212 = vu26("Frame", vu206, {
+		Size = UDim2.new(0, 0, 0, 18),
+		BackgroundColor3 = v210,
+		Name = "GlowSubFrame",
+	})
+
+	vu158("Corner", vu212, UDim.new(0, 4))
+
+	local vu213 = vu14(
+		vu26("TextLabel", vu212, {
+			Position = UDim2.new(0.5, 0, 0.5, 0),
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			AutomaticSize = "X",
+			Text = v209,
+			TextColor3 = v211,
+			BackgroundTransparency = 1,
+			TextXAlignment = "Center",
+			TextSize = 8,
+			Font = Enum.Font.GothamBold,
+			Name = "GlowSubText",
+		}),
+		"Text"
+	)
+
+	vu212.Size = UDim2.new(0, vu213.TextBounds.X + 12 * 2, 0, 18)
+
+	local v214 = math.max(vu207.TextBounds.X, vu208.TextBounds.X)
+
+	vu212.Position = UDim2.new(
+		0,
+		vu207.Position.X.Offset + v214 + 40,
+		0,
+		vu207.Position.Y.Offset + (vu207.TextBounds.Y + vu208.TextBounds.Y) / 2 - 8
+	)
+
+	local vu215 = vu14(
+		vu26("ScrollingFrame", v204, {
+			Size = UDim2.new(0, vu7.Save.TabSize, 1, -vu206.Size.Y.Offset),
+			ScrollBarImageColor3 = vu151["Color Theme"],
+			Position = UDim2.new(0, 0, 1, 0),
+			AnchorPoint = Vector2.new(0, 1),
+			ScrollBarThickness = 1.5,
+			BackgroundTransparency = 1,
+			ScrollBarImageTransparency = 0.2,
+			CanvasSize = UDim2.new(),
+			AutomaticCanvasSize = "Y",
+			ScrollingDirection = "Y",
+			BorderSizePixel = 0,
+			Name = "Tab Scroll",
+		}, {
+			vu26("UIPadding", {
+				PaddingLeft = UDim.new(0, 10),
+				PaddingRight = UDim.new(0, 10),
+				PaddingTop = UDim.new(0, 10),
+				PaddingBottom = UDim.new(0, 10),
+			}),
+			vu26("UIListLayout", {
+				Padding = UDim.new(0, 5),
+			}),
+		}),
+		"ScrollBar"
+	)
+	local vu216 = vu26("Frame", v204, {
+		Size = UDim2.new(1, -vu215.Size.X.Offset, 1, -vu206.Size.Y.Offset),
+		AnchorPoint = Vector2.new(1, 1),
+		Position = UDim2.new(1, 0, 1, 0),
+		BackgroundTransparency = 1,
+		ClipsDescendants = true,
+		Name = "Containers",
+	})
+	local vu217 = vu140(vu26("ImageButton", vu202, {
+		Size = UDim2.new(0, 35, 0, 35),
+		Position = vu202.Size,
+		Active = true,
+		AnchorPoint = Vector2.new(0.8, 0.8),
+		BackgroundTransparency = 1,
+		Name = "Control Hub Size",
+	}))
+	local vu218 = vu140(vu26("ImageButton", vu202, {
+		Size = UDim2.new(0, 20, 1, -30),
+		Position = UDim2.new(0, vu215.Size.X.Offset, 1, 0),
+		AnchorPoint = Vector2.new(0.5, 1),
+		Active = true,
+		BackgroundTransparency = 1,
+		Name = "Control Tab Size",
+	}))
+
+	local function v221()
+		local v219 = vu217.Position
+		local v220 = vu218.Position
+
+		vu217.Position = UDim2.fromOffset(math.clamp(v219.X.Offset, 430, 1000), math.clamp(v219.Y.Offset, 200, 500))
+		vu218.Position = UDim2.new(0, math.clamp(v220.X.Offset, 135, 250), 1, 0)
+		vu215.Size = UDim2.new(0, vu218.Position.X.Offset, 1, -vu206.Size.Y.Offset)
+		vu216.Size = UDim2.new(1, -vu215.Size.X.Offset, 1, -vu206.Size.Y.Offset)
+		vu202.Size = vu217.Position
+	end
+
+	local v222 = vu217
+
+	vu217.GetPropertyChangedSignal(v222, "Position"):Connect(v221)
+
+	local v223 = vu218
+
+	vu218.GetPropertyChangedSignal(v223, "Position"):Connect(v221)
+	vu123(vu217, function()
+		if not Minimized then
+			vu7.Save.UISize = {
+				vu202.Size.X.Offset,
+				vu202.Size.Y.Offset,
+			}
+
+			vu150("bruton hub with bruton library.json", vu7.Save)
+		end
+	end)
+	vu123(vu218, function()
+		vu7.Save.TabSize = vu215.Size.X.Offset
+
+		vu150("bruton hub with bruton library.json", vu7.Save)
+	end)
+
+	local v224 = vu26("Folder", vu206, {
+		Name = "Buttons",
+	})
+	local v225 = vu26("ImageButton", {
+		Size = UDim2.new(0, 14, 0, 14),
+		Position = UDim2.new(1, -10, 0.5),
+		AnchorPoint = Vector2.new(1, 0.5),
+		BackgroundTransparency = 1,
+		Image = "rbxassetid://10747384394",
+		AutoButtonColor = false,
+		Name = "Close",
+	})
+	local vu226 = vu23(v225:Clone(), {
+		Position = UDim2.new(1, -35, 0.5),
+		Image = "rbxassetid://10734896206",
+		Name = "Minimize",
+	})
+
+	vu18(v224, {
+		v225,
+		vu226,
+	})
+
+	local vu227 = nil
+	local vu228 = nil
+	local vu229 = nil
+	local vu230 = {}
+	local vu231 = false
+
+	function vu230.CloseBtn(_)
+		vu230:Dialog({
+			Title = "BRUTON HUB",
+			Text = "متاكد تريد تغلق سكربت ",
+			Options = {
+				{
+					"تاكيد",
+					function()
+						vu115:Destroy()
+					end,
+				},
+				{
+					"Cancel",
+				},
+			},
+		})
+	end
+	function vu230.MinimizeBtn(_)
+		if not vu229 then
+			vu229 = true
+
+			if vu227 then
+				vu226.Image = "rbxassetid://10734896206"
+
+				vu131({
+					vu202,
+					"Size",
+					vu228,
+					0.25,
+					true,
+				})
+
+				vu217.Visible = true
+				vu218.Visible = true
+				vu227 = false
+			else
+				vu226.Image = "rbxassetid://10734924532"
+				vu228 = vu202.Size
+				vu217.Visible = false
+				vu218.Visible = false
+
+				vu131({
+					vu202,
+					"Size",
+					UDim2.fromOffset(vu202.Size.X.Offset, 28),
+					0.25,
+					true,
+				})
+
+				vu227 = true
+			end
+
+			vu229 = false
+		end
+	end
+	function vu230.Minimize(_)
+		vu202.Visible = not vu202.Visible
+	end
+	function vu230.AddMinimizeButton(_, P232)
+		local v233 = vu140(vu26("ImageButton", vu115, {
+			Size = UDim2.fromOffset(50, 50),
+			Position = UDim2.fromScale(0.15, 0.15),
+			BackgroundTransparency = 1,
+			BackgroundColor3 = vu151["Color Hub 2"],
+			AutoButtonColor = false,
+		}))
+		local v234 = nil
+		local v235
+
+		if P232.Corner then
+			v235 = vu158("Corner", v233)
+
+			vu23(v235, P232.Corner)
+		else
+			v235 = nil
+		end
+		if P232.Stroke then
+			v234 = vu158("Stroke", v233)
+
+			vu23(v234, P232.Corner)
+		end
+
+		vu23(v233, P232.Button)
+		v233.Activated:Connect(vu230.Minimize)
+
+		return {
+			Stroke = v234,
+			Corner = v235,
+			Button = v233,
+		}
+	end
+	function vu230.Set(_, P236, P237, P238, P239, P240)
+		if type(P236) == "string" then
+			vu207.Text = P236
+		end
+		if type(P237) == "string" then
+			vu208.Text = P237
+			vu212.Position = UDim2.new(0, 15, 0, vu207.TextBounds.Y + vu208.TextBounds.Y + 10)
+		end
+		if type(P238) == "string" then
+			vu213.Text = P238
+			vu212.Size = UDim2.new(0, vu213.TextBounds.X + 12, 0, 18)
+		end
+		if typeof(P239) == "Color3" then
+			vu212.BackgroundColor3 = P239
+		end
+		if typeof(P240) == "Color3" then
+			vu213.TextColor3 = P240
+		end
+	end
+	function vu230.Dialog(_, P241)
+		if not vu202:FindFirstChild("Dialog") then
+			if vu227 then
+				vu230:MinimizeBtn()
+			end
+
+			local v242 = P241[1] or (P241.Title or "Dialog")
+			local v243 = P241[2] or (P241.Text or "This is a Dialog")
+			local v244 = P241[3] or (P241.Options or {})
+			local vu245 = vu26("Frame", {
+				Active = true,
+				Size = UDim2.fromOffset(270, 162),
+				Position = UDim2.fromScale(0.5, 0.5),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+			}, {
+				vu14(
+					vu26("TextLabel", {
+						Font = Enum.Font.GothamBold,
+						Size = UDim2.new(1, 0, 0, 20),
+						Text = v242,
+						TextXAlignment = "Left",
+						TextColor3 = vu151["Color Text"],
+						TextSize = 15,
+						Position = UDim2.fromOffset(15, 5),
+						BackgroundTransparency = 1,
+					}),
+					"Text"
+				),
+				vu14(
+					vu26("TextLabel", {
+						Font = Enum.Font.GothamMedium,
+						Size = UDim2.new(1, -25),
+						AutomaticSize = "Y",
+						Text = v243,
+						TextXAlignment = "Left",
+						TextColor3 = vu151["Color Dark Text"],
+						TextSize = 12,
+						Position = UDim2.fromOffset(15, 25),
+						BackgroundTransparency = 1,
+						TextWrapped = true,
+					}),
+					"DarkText"
+				),
+			})
+
+			vu158("Gradient", vu245, {
+				Rotation = 270,
+			})
+			vu158("Corner", vu245)
+
+			local vu246 = vu26("Frame", vu245, {
+				Size = UDim2.fromScale(1, 0.35),
+				Position = UDim2.fromScale(0, 1),
+				AnchorPoint = Vector2.new(0, 1),
+				BackgroundColor3 = vu151["Color Hub 2"],
+				BackgroundTransparency = 1,
+			}, {
+				vu26("UIListLayout", {
+					Padding = UDim.new(0, 10),
+					VerticalAlignment = "Center",
+					FillDirection = "Horizontal",
+					HorizontalAlignment = "Center",
+				}),
+			})
+			local vu247 = vu14(
+				vu26("Frame", vu202, {
+					BackgroundTransparency = 0.6,
+					Active = true,
+					BackgroundColor3 = vu151["Color Hub 2"],
+					Size = UDim2.new(1, 0, 1, 0),
+					BackgroundColor3 = vu151["Color Stroke"],
+					Name = "Dialog",
+				}),
+				"Stroke"
+			)
+
+			vu203:Clone().Parent = vu247
+			vu245.Parent = vu247
+
+			vu131({
+				vu245,
+				"Size",
+				UDim2.fromOffset(250, 150),
+				0.2,
+			})
+			vu131({
+				vu245,
+				"Transparency",
+				0,
+				0.15,
+			})
+			vu131({
+				vu247,
+				"Transparency",
+				0.3,
+				0.15,
+			})
+
+			local vu248 = 1
+			local vu258 = {
+				Button = function(_, P249)
+					local v250 = P249[1] or P249.Name or (P249.Title or "")
+					local v251 = P249[2] or (P249.Callback or function() end)
+
+					vu248 = vu248 + 1
+
+					local v252 = vu158("Button", vu246)
+
+					vu158("Corner", v252)
+					vu23(v252, {
+						Text = v250,
+						Font = Enum.Font.GothamBold,
+						TextColor3 = vu151["Color Text"],
+						TextSize = 12,
+					})
+
+					local v253 = vu246
+					local v254, v255, v256 = pairs(v253:GetChildren())
+
+					while true do
+						local v257
+
+						v256, v257 = v254(v255, v256)
+
+						if v256 == nil then
+							break
+						end
+						if v257:IsA("TextButton") then
+							v257.Size = UDim2.new(1 / vu248, -((vu248 - 1) * 20 / vu248), 0, 32)
+						end
+					end
+
+					v252.Activated:Connect(vu258.Close)
+					v252.Activated:Connect(v251)
+				end,
+				Close = function(_)
+					vu131({
+						vu245,
+						"Size",
+						UDim2.fromOffset(270, 162),
+						0.2,
+					})
+					vu131({
+						vu247,
+						"Transparency",
+						1,
+						0.15,
+					})
+					vu131({
+						vu245,
+						"Transparency",
+						1,
+						0.15,
+						true,
+					})
+					vu247:Destroy()
+				end,
+			}
+
+			table.foreach(v244, function(_, P259)
+				vu258:Button(P259)
+			end)
+
+			return vu258
+		end
+	end
+	function vu230.SelectTab(_, P260)
+		if type(P260) ~= "number" then
+			local v261, v262, v263 = pairs(vu7.Tabs)
+
+			while true do
+				local v264
+
+				v263, v264 = v261(v262, v263)
+
+				if v263 == nil then
+					break
+				end
+				if v264.Cont == P260.Cont then
+					v264.func:Enable()
+				end
+			end
+		else
+			vu7.Tabs[P260].func:Enable()
+		end
+	end
+
+	local vu265 = {}
+
+	function vu230.MakeTab(_, P266, P267)
+		if type(P266) == "table" then
+			P267 = P266
+		end
+
+		local v268 = P267[1] or (P267.Title or "Tab!")
+		local v269 = vu7:GetIcon(P267[2] or (P267.Icon or ""))
+
+		if v269:find("rbxassetid://") then
+			if v269:gsub("rbxassetid://", ""):len() < 6 then
+				v269 = false
+			end
+		else
+			v269 = false
+		end
+
+		local vu270 = vu158("Button", vu215, {
+			Size = UDim2.new(1, 0, 0, 24),
+		})
+
+		vu158("Corner", vu270)
+
+		local vu271 = vu14(
+			vu26("TextLabel", vu270, {
+				Size = UDim2.new(1, v269 and -25 or -15, 1),
+				Position = UDim2.fromOffset(v269 and 25 or 15),
+				BackgroundTransparency = 1,
+				Font = Enum.Font.GothamMedium,
+				Text = v268,
+				TextColor3 = vu151["Color Text"],
+				TextSize = 10,
+				TextXAlignment = Enum.TextXAlignment.Left,
+				TextTransparency = vu231 and 0.3 or 0,
+				TextTruncate = "AtEnd",
+			}),
+			"Text"
+		)
+		local vu272 = vu14(
+			vu26("ImageLabel", vu270, {
+				Position = UDim2.new(0, 8, 0.5),
+				Size = UDim2.new(0, 13, 0, 13),
+				AnchorPoint = Vector2.new(0, 0.5),
+				Image = v269 or "",
+				BackgroundTransparency = 1,
+				ImageTransparency = vu231 and 0.3 or 0,
+			}),
+			"Text"
+		)
+		local vu273 = vu14(
+			vu26("Frame", vu270, {
+				Size = vu231 and UDim2.new(0, 4, 0, 4) or UDim2.new(0, 4, 0, 13),
+				Position = UDim2.new(0, 1, 0.5),
+				AnchorPoint = Vector2.new(0, 0.5),
+				BackgroundColor3 = vu151["Color Theme"],
+				BackgroundTransparency = vu231 and 1 or 0,
+			}),
+			"Theme"
+		)
+
+		vu158("Corner", vu273, UDim.new(0.5, 0))
+
+		local vu274 = vu14(
+			vu26("ScrollingFrame", {
+				Size = UDim2.new(1, 0, 1, 0),
+				Position = UDim2.new(0, 0, 1),
+				AnchorPoint = Vector2.new(0, 1),
+				ScrollBarThickness = 1.5,
+				BackgroundTransparency = 1,
+				ScrollBarImageTransparency = 0.2,
+				ScrollBarImageColor3 = vu151["Color Theme"],
+				AutomaticCanvasSize = "Y",
+				ScrollingDirection = "Y",
+				BorderSizePixel = 0,
+				CanvasSize = UDim2.new(),
+				Name = ("Container %i [ %s ]"):format(#vu265 + 1, v268),
+			}, {
+				vu26("UIPadding", {
+					PaddingLeft = UDim.new(0, 10),
+					PaddingRight = UDim.new(0, 10),
+					PaddingTop = UDim.new(0, 10),
+					PaddingBottom = UDim.new(0, 10),
+				}),
+				vu26("UIListLayout", {
+					Padding = UDim.new(0, 5),
+				}),
+			}),
+			"ScrollBar"
+		)
+
+		table.insert(vu265, vu274)
+
+		if not vu231 then
+			vu274.Parent = vu216
+		end
+
+		local function vu280()
+			if not vu274.Parent then
+				local v275, v276, v277 = pairs(vu265)
+
+				while true do
+					local v278
+
+					v277, v278 = v275(v276, v277)
+
+					if v277 == nil then
+						break
+					end
+					if v278:IsA("ScrollingFrame") and v278 ~= vu274 then
+						v278.Parent = nil
+					end
+				end
+
+				vu274.Parent = vu216
+				vu274.Size = UDim2.new(1, 0, 1, 150)
+
+				table.foreach(vu7.Tabs, function(_, P279)
+					if P279.Cont ~= vu274 then
+						P279.func:Disable()
+					end
+				end)
+				vu131({
+					vu274,
+					"Size",
+					UDim2.new(1, 0, 1, 0),
+					0.3,
+				})
+				vu131({
+					vu271,
+					"TextTransparency",
+					0,
+					0.35,
+				})
+				vu131({
+					vu272,
+					"ImageTransparency",
+					0,
+					0.35,
+				})
+				vu131({
+					vu273,
+					"Size",
+					UDim2.new(0, 4, 0, 13),
+					0.35,
+				})
+				vu131({
+					vu273,
+					"BackgroundTransparency",
+					0,
+					0.35,
+				})
+			end
+		end
+
+		vu270.Activated:Connect(vu280)
+
+		vu231 = true
+
+		local v281 = {}
+
+		table.insert(vu7.Tabs, {
+			TabInfo = {
+				Name = v268,
+				Icon = v269,
+			},
+			func = v281,
+			Cont = vu274,
+		})
+
+		v281.Cont = vu274
+
+		function v281.Disable(_)
+			vu274.Parent = nil
+
+			vu131({
+				vu271,
+				"TextTransparency",
+				0.3,
+				0.35,
+			})
+			vu131({
+				vu272,
+				"ImageTransparency",
+				0.3,
+				0.35,
+			})
+			vu131({
+				vu273,
+				"Size",
+				UDim2.new(0, 4, 0, 4),
+				0.35,
+			})
+			vu131({
+				vu273,
+				"BackgroundTransparency",
+				1,
+				0.35,
+			})
+		end
+		function v281.Enable(_)
+			vu280()
+		end
+		function v281.Visible(_, P282)
+			vu83:ToggleVisible(vu270, P282)
+			vu83:ToggleParent(vu274, P282, vu216)
+		end
+		function v281.Destroy(_)
+			vu270:Destroy()
+			vu274:Destroy()
+		end
+		function v281.AddSection(_, P283)
+			local v284
+
+			if type(P283) ~= "string" or not P283 then
+				v284 = P283[1] or P283.Name or (P283.Title or P283.Section)
+			else
+				v284 = P283
+			end
+
+			local v285 = P283.Icon or nil
+			local vu286 = vu26("Frame", vu274, {
+				Size = UDim2.new(1, 0, 0, 20),
+				BackgroundTransparency = 1,
+				Name = "Option",
+			})
+			local vu287 = vu26("Frame", vu286, {
+				Size = UDim2.new(1, 0, 1, 0),
+				BackgroundTransparency = 1,
+				Position = UDim2.new(0, 0, 0, 0),
+			})
+			local vu288
+
+			if v285 then
+				local v289 = vu26
+				local v290 = {
+					Size = UDim2.new(0, 14, 0, 14),
+					Position = UDim2.new(0, 5, 0, 3),
+					BackgroundTransparency = 1,
+					Image = vu7:GetIcon(v285),
+					ImageColor3 = vu151["Color Text"],
+					Name = "SectionIcon",
+				}
+
+				vu288 = v289("ImageLabel", vu287, v290)
+			else
+				vu288 = nil
+			end
+
+			local v291 = v285 and UDim2.new(0, 24, 0, 0) or UDim2.new(0, 5, 0, 0)
+			local vu292 = vu14(
+				vu26("TextLabel", vu287, {
+					Font = Enum.Font.GothamBold,
+					Text = v284,
+					TextColor3 = vu151["Color Text"],
+					Size = UDim2.new(1, -25, 1, 0),
+					Position = v291,
+					BackgroundTransparency = 1,
+					TextTruncate = "AtEnd",
+					TextSize = 14,
+					TextXAlignment = "Left",
+				}),
+				"Text"
+			)
+			local v293 = {}
+
+			table.insert(vu7.Options, {
+				type = "Section",
+				Name = v284,
+				func = v293,
+			})
+
+			function v293.Visible(_, P294)
+				if P294 == nil then
+					vu286.Visible = not vu286.Visible
+				else
+					vu286.Visible = P294
+				end
+			end
+			function v293.Destroy(_)
+				vu286:Destroy()
+			end
+			function v293.Set(_, P295)
+				if P295 then
+					vu292.Text = vu119(P295)
+				end
+			end
+			function v293.SetIcon(_, P296)
+				if P296 then
+					local v297 = vu7:GetIcon(P296)
+
+					if vu288 then
+						vu288.Image = v297
+					else
+						vu288 = vu26("ImageLabel", vu287, {
+							Size = UDim2.new(0, 14, 0, 14),
+							Position = UDim2.new(0, 5, 0, 3),
+							BackgroundTransparency = 1,
+							Image = v297,
+							ImageColor3 = vu151["Color Text"],
+							Name = "SectionIcon",
+						})
+						vu292.Position = UDim2.new(0, 24, 0, 0)
+					end
+				end
+			end
+
+			return v293
+		end
+		function v281.AddParagraph(_, P298)
+			local v299 = P298[1] or (P298.Title or "Paragraph")
+			local vu300 = P298[2] or (P298.Text or "")
+			local v301 = P298.Icon or nil
+			local vu302 = vu26("Frame", vu274, {
+				Size = UDim2.new(1, 0, 0, 25),
+				AutomaticSize = "Y",
+				BackgroundTransparency = 1,
+				Name = "Option",
+			})
+			local vu303 = vu26("Frame", vu302, {
+				Size = UDim2.new(1, -20, 0, 0),
+				AutomaticSize = "Y",
+				Position = UDim2.new(0, 10, 0, 0),
+				BackgroundTransparency = 1,
+			})
+			local vu304
+
+			if v301 then
+				local v305 = vu26
+				local v306 = {
+					Size = UDim2.new(0, 16, 0, 16),
+					BackgroundTransparency = 1,
+					Image = vu7:GetIcon(v301),
+					ImageColor3 = vu151["Color Text"],
+					Name = "ParagraphIcon",
+				}
+
+				vu304 = v305("ImageLabel", vu303, v306)
+			else
+				vu304 = nil
+			end
+
+			local v307 = v301 and 20 or 0
+			local vu308 = vu26("Frame", vu303, {
+				Size = UDim2.new(1, -v307, 0, 0),
+				AutomaticSize = "Y",
+				Position = UDim2.new(0, v307, 0, 0),
+				BackgroundTransparency = 1,
+			}, {
+				vu26("UIListLayout", {
+					SortOrder = "LayoutOrder",
+					Padding = UDim.new(0, 2),
+				}),
+			})
+			local vu309 = vu14(
+				vu26("TextLabel", vu308, {
+					Font = Enum.Font.GothamMedium,
+					TextColor3 = vu151["Color Text"],
+					Size = UDim2.new(1, 0, 0, 16),
+					AutomaticSize = "Y",
+					BackgroundTransparency = 1,
+					TextTruncate = "AtEnd",
+					TextSize = 10,
+					TextXAlignment = "Left",
+					Text = v299,
+					RichText = true,
+					LayoutOrder = 1,
+				}),
+				"Text"
+			)
+			local vu310 = vu14(
+				vu26("TextLabel", vu308, {
+					Font = Enum.Font.Gotham,
+					TextColor3 = vu151["Color Dark Text"],
+					Size = UDim2.new(1, 0, 0, 0),
+					AutomaticSize = "Y",
+					BackgroundTransparency = 1,
+					TextWrapped = true,
+					TextSize = 8,
+					TextXAlignment = "Left",
+					Text = vu300,
+					RichText = true,
+					LayoutOrder = 2,
+				}),
+				"DarkText"
+			)
+
+			local function vu311()
+				if vu304 then
+					if vu300 and vu300 ~= "" then
+						vu304.Position = UDim2.new(0, 0, 0, 4)
+					else
+						vu304.Position = UDim2.new(0, 0, 0.5, 0)
+						vu304.AnchorPoint = Vector2.new(0, 0.5)
+					end
+				end
+			end
+
+			local v320 = {
+				Visible = function(_, ...)
+					vu302.Visible = ...
+				end,
+				Destroy = function(_)
+					vu302:Destroy()
+				end,
+				SetTitle = function(_, P312)
+					vu309.Text = vu119(P312)
+
+					vu311()
+				end,
+				SetDesc = function(_, P313)
+					vu300 = P313
+					vu310.Text = vu119(P313)
+
+					local v314 = vu310
+
+					if P313 then
+						P313 = P313 ~= ""
+					end
+
+					v314.Visible = P313
+
+					vu311()
+				end,
+				Set = function(P315, P316, P317)
+					if P316 and P317 then
+						P315:SetTitle(P316)
+						P315:SetDesc(P317)
+					elseif P316 then
+						P315:SetDesc(P316)
+					end
+				end,
+				SetIcon = function(_, P318)
+					if P318 then
+						local v319 = vu7:GetIcon(P318)
+
+						if vu304 then
+							vu304.Image = v319
+						else
+							vu304 = vu26("ImageLabel", vu303, {
+								Size = UDim2.new(0, 16, 0, 16),
+								BackgroundTransparency = 1,
+								Image = v319,
+								ImageColor3 = vu151["Color Text"],
+								Name = "ParagraphIcon",
+							})
+							vu308.Position = UDim2.new(0, 20, 0, 0)
+							vu308.Size = UDim2.new(1, -20, 0, 0)
+						end
+
+						vu311()
+					end
+				end,
+			}
+
+			v320:SetDesc(vu300)
+			vu311()
+
+			return v320
+		end
+		function v281.AddButton(_, P321)
+			local v322 = P321[1] or P321.Name or (P321.Title or "Button!")
+			local v323 = P321.Desc or (P321.Description or "")
+			local vu324 = vu83:GetCallback(P321, 2)
+			local vu325, vu326 = vu180(vu274, v322, v323, UDim2.new(1, -20))
+
+			vu26("ImageLabel", vu325, {
+				Size = UDim2.new(0, 14, 0, 14),
+				Position = UDim2.new(1, -10, 0.5),
+				AnchorPoint = Vector2.new(1, 0.5),
+				BackgroundTransparency = 1,
+				Image = "rbxassetid://10723396107",
+			})
+			vu325.Activated:Connect(function()
+				vu83:FireCallback(vu324)
+			end)
+
+			return {
+				Visible = function(_, ...)
+					vu83:ToggleVisible(vu325, ...)
+				end,
+				Destroy = function(_)
+					vu325:Destroy()
+				end,
+				Callback = function(_, ...)
+					vu83:InsertCallback(vu324, ...)
+				end,
+				Set = function(_, P327, P328)
+					if type(P327) ~= "string" or type(P328) ~= "string" then
+						if type(P327) ~= "string" then
+							if type(P327) == "function" then
+								vu324 = P327
+							end
+						else
+							vu326:SetTitle(P327)
+						end
+					else
+						vu326:SetTitle(P327)
+						vu326:SetDesc(P328)
+					end
+				end,
+			}
+		end
+		function v281.AddToggle(_, P329)
+			local v330 = P329[1] or P329.Name or (P329.Title or "Toggle")
+			local v331 = P329.Desc or (P329.Description or "")
+			local vu332 = vu83:GetCallback(P329, 3)
+			local vu333 = P329[4] or (P329.Flag or false)
+			local vu334 = P329[2] or (P329.Default or false)
+
+			if vu104(vu333) then
+				vu334 = vu107(vu333)
+			end
+
+			local vu335, vu336 = vu180(vu274, v330, v331, UDim2.new(1, -38))
+			local v337 = vu14(
+				vu26("Frame", vu335, {
+					Size = UDim2.new(0, 35, 0, 18),
+					Position = UDim2.new(1, -10, 0.5),
+					AnchorPoint = Vector2.new(1, 0.5),
+					BackgroundColor3 = vu151["Color Stroke"],
+				}),
+				"Stroke"
+			)
+
+			vu158("Corner", v337, UDim.new(0.5, 0))
+
+			local vu338 = vu14(
+				vu26(
+					"Frame",
+					vu26("Frame", v337, {
+						BackgroundTransparency = 1,
+						Size = UDim2.new(0.8, 0, 0.8, 0),
+						Position = UDim2.new(0.5, 0, 0.5, 0),
+						AnchorPoint = Vector2.new(0.5, 0.5),
+					}),
+					{
+						Size = UDim2.new(0, 12, 0, 12),
+						Position = UDim2.new(0, 0, 0.5),
+						AnchorPoint = Vector2.new(0, 0.5),
+						BackgroundColor3 = vu151["Color Theme"],
+					}
+				),
+				"Theme"
+			)
+
+			vu158("Corner", vu338, UDim.new(0.5, 0))
+
+			local vu339 = nil
+
+			local function vu341(P340)
+				if not vu339 then
+					vu334 = P340
+					vu339 = true
+
+					vu110(vu333, vu334)
+					vu83:FireCallback(vu332, vu334)
+
+					if vu334 then
+						vu131({
+							vu338,
+							"Position",
+							UDim2.new(1, 0, 0.5),
+							0.25,
+						})
+						vu131({
+							vu338,
+							"BackgroundTransparency",
+							0,
+							0.25,
+						})
+						vu131({
+							vu338,
+							"AnchorPoint",
+							Vector2.new(1, 0.5),
+							0.25,
+							Wait or false,
+						})
+					else
+						vu131({
+							vu338,
+							"Position",
+							UDim2.new(0, 0, 0.5),
+							0.25,
+						})
+						vu131({
+							vu338,
+							"BackgroundTransparency",
+							0.8,
+							0.25,
+						})
+						vu131({
+							vu338,
+							"AnchorPoint",
+							Vector2.new(0, 0.5),
+							0.25,
+							Wait or false,
+						})
+					end
+
+					vu339 = false
+				end
+			end
+
+			task.spawn(vu341, vu334)
+			vu335.Activated:Connect(function()
+				vu341(not vu334)
+			end)
+
+			return {
+				Visible = function(_, ...)
+					vu83:ToggleVisible(vu335, ...)
+				end,
+				Destroy = function(_)
+					vu335:Destroy()
+				end,
+				Callback = function(_, ...)
+					vu83:InsertCallback(vu332, ...)()
+				end,
+				Set = function(_, P342, P343)
+					if type(P342) ~= "string" or type(P343) ~= "string" then
+						if type(P342) ~= "string" then
+							if type(P342) ~= "boolean" then
+								if type(P342) == "function" then
+									vu332 = P342
+								end
+							else
+								if vu339 and P343 then
+									repeat
+										task.wait()
+									until not vu339
+								end
+
+								task.spawn(vu341, P342)
+							end
+						else
+							vu336:SetTitle(P342, false, true)
+						end
+					else
+						vu336:SetTitle(P342)
+						vu336:SetDesc(P343)
+					end
+				end,
+			}
+		end
+		function v281.AddDropdown(_, P344)
+			local v345 = P344[1] or P344.Name or (P344.Title or "Dropdown")
+			local v346 = P344.Desc or (P344.Description or "")
+			local v347 = P344[2] or (P344.Options or {})
+			local v348 = P344[3] or (P344.Default or {})
+			local vu349 = P344[5] or (P344.Flag or false)
+			local v350 = P344.MultiSelect or false
+			local vu351 = vu83:GetCallback(P344, 4)
+			local vu352, _ = vu180(vu274, v345, v346, UDim2.new(1, -180))
+			local vu353 = vu14(
+				vu26("Frame", vu352, {
+					Size = UDim2.new(0, 150, 0, 18),
+					Position = UDim2.new(1, -10, 0.5),
+					AnchorPoint = Vector2.new(1, 0.5),
+					BackgroundColor3 = vu151["Color Stroke"],
+				}),
+				"Stroke"
+			)
+
+			vu158("Corner", vu353, UDim.new(0, 4))
+
+			local vu354 = vu14(
+				vu26("TextLabel", vu353, {
+					Size = UDim2.new(0.85, 0, 0.85, 0),
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					Position = UDim2.new(0.5, 0, 0.5, 0),
+					BackgroundTransparency = 1,
+					Font = Enum.Font.GothamBold,
+					TextScaled = true,
+					TextColor3 = vu151["Color Text"],
+					Text = "...",
+				}),
+				"Text"
+			)
+			local vu355 = vu26("ImageLabel", vu353, {
+				Size = UDim2.new(0, 15, 0, 15),
+				Position = UDim2.new(0, -5, 0.5),
+				AnchorPoint = Vector2.new(1, 0.5),
+				Image = "rbxassetid://10709791523",
+				BackgroundTransparency = 1,
+			})
+			local vu356 = vu26("TextButton", vu205, {
+				Name = "AntiClick",
+				Size = UDim2.new(1, 0, 1, 0),
+				BackgroundTransparency = 1,
+				Visible = false,
+				Text = "",
+			})
+			local vu357 = vu26("Frame", vu356, {
+				Size = UDim2.new(vu353.Size.X, 0, 0),
+				BackgroundTransparency = 0.1,
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+				AnchorPoint = Vector2.new(0, 1),
+				Name = "DropdownFrame",
+				ClipsDescendants = true,
+				Active = true,
+			})
+
+			vu158("Corner", vu357)
+			vu158("Stroke", vu357)
+			vu158("Gradient", vu357, {
+				Rotation = 60,
+			})
+
+			local vu358 = vu14(
+				vu26("ScrollingFrame", vu357, {
+					ScrollBarImageColor3 = vu151["Color Theme"],
+					Size = UDim2.new(1, 0, 1, 0),
+					ScrollBarThickness = 1.5,
+					BackgroundTransparency = 1,
+					BorderSizePixel = 0,
+					CanvasSize = UDim2.new(),
+					ScrollingDirection = "Y",
+					AutomaticCanvasSize = "Y",
+					Active = true,
+				}, {
+					vu26("UIPadding", {
+						PaddingLeft = UDim.new(0, 8),
+						PaddingRight = UDim.new(0, 8),
+						PaddingTop = UDim.new(0, 5),
+						PaddingBottom = UDim.new(0, 5),
+					}),
+					vu26("UIListLayout", {
+						Padding = UDim.new(0, 4),
+					}),
+				}),
+				"ScrollBar"
+			)
+			local vu359 = 5
+			local vu360 = nil
+
+			local function v361()
+				vu360 = true
+
+				vu131({
+					vu355,
+					"Rotation",
+					0,
+					0.2,
+				})
+				vu131({
+					vu357,
+					"Size",
+					UDim2.new(0, 152, 0, 0),
+					0.2,
+					true,
+				})
+				vu131({
+					vu355,
+					"ImageColor3",
+					Color3.fromRGB(255, 255, 255),
+					0.2,
+				})
+
+				vu355.Image = "rbxassetid://10709791523"
+				vu356.Visible = false
+				vu360 = false
+			end
+			local function vu362()
+				return UDim2.fromOffset(152, vu359)
+			end
+			local function v369()
+				local v363 = vu358
+				local v364, v365, v366 = pairs(v363:GetChildren())
+				local v367 = 0
+
+				while true do
+					local v368
+
+					v366, v368 = v364(v365, v366)
+
+					if v366 == nil then
+						break
+					end
+					if v368:IsA("Frame") or v368.Name == "Option" then
+						v367 = v367 + 1
+					end
+				end
+
+				vu359 = math.clamp(v367, 0, 10) * 25 + 10
+
+				if vu356.Visible then
+					vu356.Visible = true
+
+					vu131({
+						vu357,
+						"Size",
+						vu362(),
+						0.2,
+						true,
+					})
+				end
+			end
+			local function v370()
+				if not vu360 then
+					vu360 = true
+
+					if vu356.Visible then
+						vu355.Image = "rbxassetid://10709791523"
+
+						vu131({
+							vu355,
+							"ImageColor3",
+							Color3.fromRGB(255, 255, 255),
+							0.2,
+						})
+						vu131({
+							vu357,
+							"Size",
+							UDim2.new(0, 152, 0, 0),
+							0.2,
+							true,
+						})
+
+						vu356.Visible = false
+					else
+						vu356.Visible = true
+						vu355.Image = "rbxassetid://10709790948"
+
+						vu131({
+							vu355,
+							"ImageColor3",
+							vu151["Color Theme"],
+							0.2,
+						})
+						vu131({
+							vu357,
+							"Size",
+							vu362(),
+							0.2,
+							true,
+						})
+					end
+
+					vu360 = false
+				end
+			end
+			local function v377()
+				local v371 = vu353.AbsolutePosition
+				local v372 = vu115.AbsoluteSize
+				local v373 = math.clamp(v371.X / vu9, 0, v372.X / vu9 - vu357.Size.X.Offset)
+				local v374 = math.clamp(v371.Y / vu9, 0, v372.Y / vu9)
+				local v375 = UDim2.fromOffset(v373, v374)
+				local v376 = v371.Y > v372.Y / 1.4 and 1 or (vu359 > 80 and 0.5 or 0)
+
+				vu357.AnchorPoint = Vector2.new(0, v376)
+
+				vu131({
+					vu357,
+					"Position",
+					v375,
+					0.1,
+				})
+			end
+
+			local v378 = type(v348) ~= "table" and ({
+				v348,
+			} or v348) or v348
+			local vu379 = v350
+			local vu380 = {}
+			local vu381 = vu379 and {} or (vu104(vu349) and vu107(vu349) or v378[1])
+
+			if vu379 then
+				local v382 = pairs
+
+				if vu104(vu349) then
+					v378 = vu107(vu349) or v378
+				end
+
+				local v383, v384, v385 = v382(v378)
+
+				while true do
+					local v386, v387 = v383(v384, v385)
+
+					if v386 == nil then
+						break
+					end
+
+					v385 = v386
+
+					if type(v386) ~= "string" or not (v347[v386] or table.find(v347, v386)) then
+						if v347[v387] then
+							vu381[v387] = true
+						end
+					else
+						vu381[v386] = v387
+					end
+				end
+			end
+
+			local function vu388()
+				vu110(vu349, vu379 and vu381 or tostring(vu381))
+				vu83:FireCallback(vu351, vu381)
+			end
+			local function vu394()
+				if vu379 then
+					local v389, v390, v391 = pairs(vu381)
+					local v392 = {}
+
+					while true do
+						local v393
+
+						v391, v393 = v389(v390, v391)
+
+						if v391 == nil then
+							break
+						end
+						if v393 then
+							table.insert(v392, v391)
+						end
+					end
+
+					vu354.Text = #v392 > 0 and table.concat(v392, ", ") or "..."
+				else
+					vu354.Text = tostring(vu381 or "...")
+				end
+			end
+			local function vu407()
+				if vu379 then
+					local v395, v396, v397 = pairs(vu380)
+
+					while true do
+						local v398
+
+						v397, v398 = v395(v396, v397)
+
+						if v397 == nil then
+							break
+						end
+
+						local v399 = v398.nodes
+						local v400 = v398.Stats
+
+						vu131({
+							v399[2],
+							"BackgroundTransparency",
+							v400 and 0 or 0.8,
+							0.35,
+						})
+						vu131({
+							v399[2],
+							"Size",
+							v400 and UDim2.fromOffset(4, 12) or UDim2.fromOffset(4, 4),
+							0.35,
+						})
+						vu131({
+							v399[3],
+							"TextTransparency",
+							v400 and 0 or 0.4,
+							0.35,
+						})
+					end
+				else
+					local v401, v402, v403 = pairs(vu380)
+
+					while true do
+						local v404
+
+						v403, v404 = v401(v402, v403)
+
+						if v403 == nil then
+							break
+						end
+
+						local v405 = v404.Value == vu381
+						local v406 = v404.nodes
+
+						vu131({
+							v406[2],
+							"BackgroundTransparency",
+							v405 and 0 or 1,
+							0.35,
+						})
+						vu131({
+							v406[2],
+							"Size",
+							v405 and UDim2.fromOffset(4, 14) or UDim2.fromOffset(4, 4),
+							0.35,
+						})
+						vu131({
+							v406[3],
+							"TextTransparency",
+							v405 and 0 or 0.4,
+							0.35,
+						})
+					end
+				end
+
+				vu394()
+			end
+			local function vu409(P408)
+				if vu379 then
+					P408.Stats = not P408.Stats
+					P408.LastCB = tick()
+					vu381[P408.Name] = P408.Stats
+
+					vu388()
+				else
+					P408.LastCB = tick()
+					vu381 = P408.Value
+
+					vu388()
+				end
+
+				vu407()
+			end
+			local function vu419(P410, P411)
+				local v412 = tostring
+				local v413
+
+				if type(P410) ~= "string" or not P410 then
+					v413 = P411
+				else
+					v413 = P410
+				end
+
+				local vu414 = v412(v413)
+
+				if not vu380[vu414] then
+					vu380[vu414] = {
+						index = P410,
+						Value = P411,
+						Name = vu414,
+						Stats = false,
+						LastCB = 0,
+					}
+
+					if vu379 then
+						local v415 = vu381[vu414]
+
+						vu381[vu414] = v415 or false
+						vu380[vu414].Stats = v415
+					end
+
+					local v416 = vu158("Button", vu358, {
+						Name = "Option",
+						Size = UDim2.new(1, 0, 0, 21),
+						Position = UDim2.new(0, 0, 0.5),
+						AnchorPoint = Vector2.new(0, 0.5),
+					})
+
+					vu158("Corner", v416, UDim.new(0, 4))
+
+					local v417 = vu14(
+						vu26("Frame", v416, {
+							Position = UDim2.new(0, 1, 0.5),
+							Size = UDim2.new(0, 4, 0, 4),
+							BackgroundColor3 = vu151["Color Theme"],
+							BackgroundTransparency = 1,
+							AnchorPoint = Vector2.new(0, 0.5),
+						}),
+						"Theme"
+					)
+
+					vu158("Corner", v417, UDim.new(0.5, 0))
+
+					local v418 = vu14(
+						vu26("TextLabel", v416, {
+							Size = UDim2.new(1, 0, 1),
+							Position = UDim2.new(0, 10),
+							Text = vu414,
+							TextColor3 = vu151["Color Text"],
+							Font = Enum.Font.GothamBold,
+							TextXAlignment = "Left",
+							BackgroundTransparency = 1,
+							TextTransparency = 0.4,
+						}),
+						"Text"
+					)
+
+					v416.Activated:Connect(function()
+						vu409(vu380[vu414])
+					end)
+
+					vu380[vu414].nodes = {
+						v416,
+						v417,
+						v418,
+					}
+				end
+			end
+			local function vu424(P420, P421)
+				local v422 = tostring
+
+				if type(P420) == "string" and P420 then
+					P421 = P420
+				end
+
+				local v423 = v422(P421)
+
+				if vu380[v423] then
+					if vu379 then
+						vu381[v423] = nil
+					else
+						vu381 = nil
+					end
+
+					vu380[v423].nodes[1]:Destroy()
+					table.clear(vu380[v423])
+
+					vu380[v423] = nil
+				end
+			end
+			local function vu425()
+				return vu380
+			end
+			local function vu428(P426, P427)
+				if P427 then
+					table.foreach(vu380, vu424)
+				end
+
+				table.foreach(P426, vu419)
+				vu388()
+				vu407()
+			end
+
+			table.foreach(v347, vu419)
+			vu388()
+			vu407()
+			vu352.Activated:Connect(v370)
+			vu356.MouseButton1Down:Connect(v361)
+			vu356.MouseButton1Click:Connect(v361)
+			vu202:GetPropertyChangedSignal("Visible"):Connect(v361)
+
+			local v429 = vu353
+
+			vu353.GetPropertyChangedSignal(v429, "AbsolutePosition"):Connect(v377)
+			vu352.Activated:Connect(v369)
+			vu358.ChildAdded:Connect(v369)
+			vu358.ChildRemoved:Connect(v369)
+			v377()
+			v369()
+
+			return {
+				Visible = function(_, ...)
+					vu83:ToggleVisible(vu352, ...)
+				end,
+				Destroy = function(_)
+					vu352:Destroy()
+				end,
+				Callback = function(_, ...)
+					vu83:InsertCallback(vu351, ...)(vu381)
+				end,
+				Add = function(_, ...)
+					local v430 = {
+						...,
+					}
+
+					if type(v430[1]) ~= "table" then
+						table.foreach(v430, function(_, P431)
+							vu419(P431)
+						end)
+					else
+						table.foreach(Option, function(_, P432)
+							vu419(P432)
+						end)
+					end
+				end,
+				Remove = function(_, P433)
+					local v434, v435, v436 = pairs(vu425())
+
+					while true do
+						local v437
+
+						v436, v437 = v434(v435, v436)
+
+						if v436 == nil then
+							break
+						end
+						if type(P433) == "number" and v436 == P433 or v437.Name == "Option" then
+							vu424(v436, v437.Value)
+						end
+					end
+				end,
+				Select = function(_, P438)
+					if type(P438) ~= "string" then
+						if type(P438) == "number" then
+							local v439, v440, v441 = pairs(Options)
+
+							while true do
+								local v442
+
+								v441, v442 = v439(v440, v441)
+
+								if v441 == nil then
+									break
+								end
+								if v441 == P438 then
+									v442.Active()
+								end
+							end
+						end
+					else
+						local v443, v444, v445 = pairs(Options)
+
+						while true do
+							local v446
+
+							v445, v446 = v443(v444, v445)
+
+							if v445 == nil then
+								break
+							end
+							if v446.Name == P438 then
+								v446.Active()
+							end
+						end
+					end
+				end,
+				Set = function(_, P447, P448)
+					if type(P447) ~= "table" then
+						if type(P447) == "function" then
+							vu351 = P447
+						end
+					else
+						vu428(P447, not P448)
+					end
+				end,
+			}
+		end
+		function v281.AddSlider(_, P449)
+			local v450 = P449[1] or P449.Name or (P449.Title or "Slider!")
+			local v451 = P449.Desc or (P449.Description or "")
+			local v452 = P449[2] or P449.MinValue or (P449.Min or 10)
+			local v453 = P449[3] or P449.MaxValue or (P449.Max or 100)
+			local vu454 = P449[4] or (P449.Increase or 1)
+			local vu455 = vu83:GetCallback(P449, 6)
+			local vu456 = P449[7] or (P449.Flag or false)
+			local vu457 = P449[5] or (P449.Default or 25)
+
+			if vu104(vu456) then
+				vu457 = vu107(vu456)
+			end
+
+			local v458 = v452 / vu454
+			local vu459 = v453 / vu454
+			local vu460 = v458
+			local vu461, vu462 = vu180(vu274, v450, v451, UDim2.new(1, -180))
+			local v463 = vu26("TextButton", vu461, {
+				Size = UDim2.new(0.45, 0, 1),
+				Position = UDim2.new(1),
+				AnchorPoint = Vector2.new(1, 0),
+				AutoButtonColor = false,
+				Text = "",
+				BackgroundTransparency = 1,
+			})
+			local vu464 = vu14(
+				vu26("Frame", v463, {
+					BackgroundColor3 = vu151["Color Stroke"],
+					Size = UDim2.new(1, -20, 0, 6),
+					Position = UDim2.new(0.5, 0, 0.5),
+					AnchorPoint = Vector2.new(0.5, 0.5),
+				}),
+				"Stroke"
+			)
+
+			vu158("Corner", vu464)
+
+			local vu465 = vu14(
+				vu26("Frame", vu464, {
+					BackgroundColor3 = vu151["Color Theme"],
+					Size = UDim2.fromScale(0.3, 1),
+					BorderSizePixel = 0,
+				}),
+				"Theme"
+			)
+
+			vu158("Corner", vu465)
+
+			local vu466 = vu26("Frame", vu464, {
+				Size = UDim2.new(0, 6, 0, 12),
+				BackgroundColor3 = Color3.fromRGB(220, 220, 220),
+				Position = UDim2.fromScale(0.3, 0.5),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				BackgroundTransparency = 0.2,
+			})
+
+			vu158("Corner", vu466)
+
+			local vu467 = vu14(
+				vu26("TextLabel", v463, {
+					Size = UDim2.new(0, 14, 0, 14),
+					AnchorPoint = Vector2.new(1, 0.5),
+					Position = UDim2.new(0, 0, 0.5),
+					BackgroundTransparency = 1,
+					TextColor3 = vu151["Color Text"],
+					Font = Enum.Font.FredokaOne,
+					TextSize = 12,
+				}),
+				"Text"
+			)
+			local vu468 = vu26("UIScale", vu467)
+			local vu469 = vu26("Frame", vu464, {
+				Position = UDim2.new(0, 0, 0.5, 0),
+				Visible = false,
+			})
+
+			local function vu473(P470)
+				local v471 = tonumber(P470 * vu454)
+				local v472 = math.floor(v471 * 100) / 100
+
+				vu467.Text = tostring(v472)
+				vu457 = v472
+
+				vu83:FireCallback(vu455, vu457)
+			end
+			local function vu475()
+				local v474 = (vu6:GetMouse().X - vu469.AbsolutePosition.X) / vu464.AbsoluteSize.X
+
+				vu466.Position = UDim2.new(math.clamp(v474, 0, 1), 0, 0.5, 0)
+			end
+			local function v477()
+				vu465.Size = UDim2.new(vu466.Position.X.Scale, 0, 1, 0)
+
+				local v476 = vu466.Position.X.Scale
+
+				vu473((math.floor(v476 * vu459 / vu459 * (vu459 - vu460) + vu460)))
+			end
+
+			v463.MouseButton1Down:Connect(function()
+				vu131({
+					vu466,
+					"Transparency",
+					0,
+					0.3,
+				})
+
+				vu274.ScrollingEnabled = false
+
+				while vu1:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+					task.wait()
+					vu475()
+				end
+
+				vu131({
+					vu466,
+					"Transparency",
+					0.2,
+					0.3,
+				})
+
+				vu274.ScrollingEnabled = true
+
+				vu110(vu456, vu457)
+			end)
+
+			local v478 = vu467
+
+			vu467.GetPropertyChangedSignal(v478, "Text"):Connect(function()
+				vu468.Scale = 0.3
+
+				vu131({
+					vu468,
+					"Scale",
+					1.2,
+					0.1,
+				})
+				vu131({
+					vu467,
+					"Rotation",
+					math.random(-1, 1) * 5,
+					0.15,
+					true,
+				})
+				vu131({
+					vu468,
+					"Scale",
+					1,
+					0.2,
+				})
+				vu131({
+					vu467,
+					"Rotation",
+					0,
+					0.1,
+				})
+			end)
+
+			function SetSlider(P479)
+				if type(P479) == "number" then
+					local v480 = vu460 * vu454
+					local v481 = vu459 * vu454
+					local v482 = (P479 - v480) / (v481 - v480)
+
+					vu110(vu456, P479)
+					vu131({
+						vu466,
+						"Position",
+						UDim2.fromScale(math.clamp(v482, 0, 1), 0.5),
+						0.3,
+						true,
+					})
+				end
+			end
+
+			SetSlider(vu457)
+
+			local v483 = vu466
+
+			vu466.GetPropertyChangedSignal(v483, "Position"):Connect(v477)
+			v477()
+
+			return {
+				Set = function(_, P484, P485)
+					if P484 and P485 then
+						vu462:SetTitle(P484)
+						vu462:SetDesc(P485)
+					elseif type(P484) ~= "string" then
+						if type(P484) ~= "function" then
+							if type(P484) == "number" then
+								SetSlider(P484)
+							end
+						else
+							vu455 = P484
+						end
+					else
+						vu462:SetTitle(P484)
+					end
+				end,
+				Callback = function(_, ...)
+					vu83:InsertCallback(vu455, ...)(tonumber(vu457))
+				end,
+				Visible = function(_, ...)
+					vu83:ToggleVisible(vu461, ...)
+				end,
+				Destroy = function(_)
+					vu461:Destroy()
+				end,
+			}
+		end
+		function v281.AddTextBox(_, P486)
+			local v487 = P486[1] or P486.Name or (P486.Title or "Text Box")
+			local v488 = P486.Desc or (P486.Description or "")
+			local v489 = P486[2] or (P486.Default or "")
+			local v490 = P486[5] or (P486.PlaceholderText or "BRUTON")
+			local v491 = P486[3] or (P486.ClearText or false)
+			local vu492 = vu83:GetCallback(P486, 4)
+
+			if type(v489) == "string" then
+				local _ = v489:gsub(" ", ""):len() >= 1
+			end
+
+			local vu493, _ = vu180(vu274, v487, v488, UDim2.new(1, -38))
+			local v494 = vu14(
+				vu26("Frame", vu493, {
+					Size = UDim2.new(0, 150, 0, 18),
+					Position = UDim2.new(1, -10, 0.5),
+					AnchorPoint = Vector2.new(1, 0.5),
+					BackgroundColor3 = vu151["Color Stroke"],
+				}),
+				"Stroke"
+			)
+
+			vu158("Corner", v494, UDim.new(0, 4))
+
+			local vu495 = vu14(
+				vu26("TextBox", v494, {
+					Size = UDim2.new(0.85, 0, 0.85, 0),
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					Position = UDim2.new(0.5, 0, 0.5, 0),
+					BackgroundTransparency = 1,
+					Font = Enum.Font.GothamBold,
+					TextScaled = true,
+					TextColor3 = vu151["Color Text"],
+					ClearTextOnFocus = v491,
+					PlaceholderText = v490,
+					Text = "",
+				}),
+				"Text"
+			)
+			local vu496 = vu26("ImageLabel", v494, {
+				Size = UDim2.new(0, 12, 0, 12),
+				Position = UDim2.new(0, -5, 0.5),
+				AnchorPoint = Vector2.new(1, 0.5),
+				Image = "rbxassetid://15637081879",
+				BackgroundTransparency = 1,
+			})
+			local vu497 = {}
+
+			local function v499()
+				local v498 = vu495.Text
+
+				if v498:gsub(" ", ""):len() > 0 then
+					if type(vu497.OnChanging) == "function" then
+						v498 = vu497.OnChanging(v498) or v498
+					end
+
+					vu83:FireCallback(vu492, v498)
+
+					vu495.Text = v498
+				end
+			end
+
+			vu495.FocusLost:Connect(v499)
+			v499()
+			vu495.FocusLost:Connect(function()
+				vu131({
+					vu496,
+					"ImageColor3",
+					Color3.fromRGB(255, 255, 255),
+					0.2,
+				})
+			end)
+			vu495.Focused:Connect(function()
+				vu131({
+					vu496,
+					"ImageColor3",
+					vu151["Color Theme"],
+					0.2,
+				})
+			end)
+
+			vu497.OnChanging = false
+
+			function vu497.Visible(_, ...)
+				vu83:ToggleVisible(vu493, ...)
+			end
+			function vu497.Destroy(_)
+				vu493:Destroy()
+			end
+
+			return vu497
+		end
+		function v281.AddDiscordInvite(_, P500)
+			local v501 = P500[1] or P500.Name or (P500.Title or "Discord")
+			local v502 = P500.Desc or (P500.Description or "")
+			local v503 = P500[2] or (P500.Logo or "")
+			local vu504 = P500[3] or (P500.Invite or "")
+			local vu505 = vu26("Frame", vu274, {
+				Size = UDim2.new(1, 0, 0, 80),
+				Name = "Option",
+				BackgroundTransparency = 1,
+			})
+
+			vu26("TextLabel", vu505, {
+				Size = UDim2.new(1, 0, 0, 15),
+				Position = UDim2.new(0, 5),
+				TextColor3 = Color3.fromRGB(40, 150, 255),
+				Font = Enum.Font.GothamBold,
+				TextXAlignment = "Left",
+				BackgroundTransparency = 1,
+				TextSize = 10,
+				Text = vu504,
+			})
+
+			local v506 = vu14(
+				vu26("Frame", vu505, {
+					Size = UDim2.new(1, 0, 0, 65),
+					AnchorPoint = Vector2.new(0, 1),
+					Position = UDim2.new(0, 0, 1),
+					BackgroundColor3 = vu151["Color Hub 2"],
+				}),
+				"Frame"
+			)
+
+			vu158("Corner", v506)
+
+			local v507 = vu26("ImageLabel", v506, {
+				Size = UDim2.new(0, 30, 0, 30),
+				Position = UDim2.new(0, 7, 0, 7),
+				Image = v503,
+				BackgroundTransparency = 1,
+			})
+
+			vu158("Corner", v507, UDim.new(0, 4))
+			vu158("Stroke", v507)
+			vu14(
+				vu26("TextLabel", v506, {
+					Size = UDim2.new(1, -52, 0, 15),
+					Position = UDim2.new(0, 44, 0, 7),
+					Font = Enum.Font.GothamBold,
+					TextColor3 = vu151["Color Text"],
+					TextXAlignment = "Left",
+					BackgroundTransparency = 1,
+					TextSize = 10,
+					Text = v501,
+				}),
+				"Text"
+			)
+			vu14(
+				vu26("TextLabel", v506, {
+					Size = UDim2.new(1, -52, 0, 0),
+					Position = UDim2.new(0, 44, 0, 22),
+					TextWrapped = "Y",
+					AutomaticSize = "Y",
+					Font = Enum.Font.Gotham,
+					TextColor3 = vu151["Color Dark Text"],
+					TextXAlignment = "Left",
+					BackgroundTransparency = 1,
+					TextSize = 8,
+					Text = v502,
+				}),
+				"DarkText"
+			)
+
+			local vu508 = vu26("TextButton", v506, {
+				Size = UDim2.new(1, -14, 0, 16),
+				AnchorPoint = Vector2.new(0.5, 1),
+				Position = UDim2.new(0.5, 0, 1, -7),
+				Text = "Join",
+				Font = Enum.Font.GothamBold,
+				TextSize = 12,
+				TextColor3 = Color3.fromRGB(220, 220, 220),
+				BackgroundColor3 = Color3.fromRGB(50, 150, 50),
+			})
+
+			vu158("Corner", vu508, UDim.new(0, 5))
+
+			local vu509 = nil
+
+			vu508.Activated:Connect(function()
+				setclipboard(vu504)
+
+				if not vu509 then
+					vu509 = true
+
+					vu23(vu508, {
+						Text = "Copied to Clipboard",
+						BackgroundColor3 = Color3.fromRGB(100, 100, 100),
+						TextColor3 = Color3.fromRGB(150, 150, 150),
+					})
+					task.wait(5)
+					vu23(vu508, {
+						Text = "Join",
+						BackgroundColor3 = Color3.fromRGB(50, 150, 50),
+						TextColor3 = Color3.fromRGB(220, 220, 220),
+					})
+
+					vu509 = false
+				end
+			end)
+
+			return {
+				Destroy = function(_)
+					vu505:Destroy()
+				end,
+				Visible = function(_, ...)
+					vu83:ToggleVisible(vu505, ...)
+				end,
+			}
+		end
+
+		return v281
+	end
+
+	v225.Activated:Connect(vu230.CloseBtn)
+	vu226.Activated:Connect(vu230.MinimizeBtn)
+
+	return vu230
+end
+
+return vu7
