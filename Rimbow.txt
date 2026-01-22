@@ -2051,23 +2051,40 @@ function Window:MakeTab(paste, Configs)
 			local Frame, LabelFunc = ButtonFrame(Container, PName, PDesc, UDim2.new(1, -20))
 			
 			local Paragraph = {}
-			function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
-			function Paragraph:Destroy() Frame:Destroy() end
-			function Paragraph:SetTitle(Val)
-				LabelFunc:SetTitle(GetStr(Val))
-			end
-			function Paragraph:SetDesc(Val)
-				LabelFunc:SetDesc(GetStr(Val))
-			end
-			function Paragraph:Set(Val1, Val2)
-				if Val1 and Val2 then
-					LabelFunc:SetTitle(GetStr(Val1))
-					LabelFunc:SetDesc(GetStr(Val2))
-				elseif Val1 then
-					LabelFunc:SetDesc(GetStr(Val1))
-				end
-			end
-			return Paragraph
+function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
+function Paragraph:Destroy() Frame:Destroy() end
+function Paragraph:SetTitle(Val)
+	LabelFunc:SetTitle(GetStr(Val))
+end
+function Paragraph:SetDesc(Val)
+	LabelFunc:SetDesc(GetStr(Val))
+end
+function Paragraph:Set(Val1, Val2)
+	if Val1 and Val2 then
+		LabelFunc:SetTitle(GetStr(Val1))
+		LabelFunc:SetDesc(GetStr(Val2))
+	elseif Val1 then
+		LabelFunc:SetDesc(GetStr(Val1))
+	end
+end
+
+local ParaStroke = Instance.new("UIStroke")
+ParaStroke.Thickness = 2
+ParaStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+ParaStroke.Parent = Frame
+
+task.spawn(function()
+	while ParaStroke and ParaStroke.Parent do
+		local t = tick() * 0.5
+		local r = math.sin(t) * 0.5 + 0.5
+		local g = math.sin(t + 2) * 0.5 + 0.5
+		local b = math.sin(t + 4) * 0.5 + 0.5
+		ParaStroke.Color = Color3.new(r, g, b)
+		task.wait()
+	end
+end)
+
+return Paragraph
 		end
 		function Tab:AddButton(Configs)
 			local BName = Configs[1] or Configs.Name or Configs.Title or "Button!"
