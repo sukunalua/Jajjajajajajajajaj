@@ -2052,6 +2052,8 @@ function Window:MakeTab(paste, Configs)
 			
 			local Paragraph = {}
 
+Frame.BackgroundTransparency = 1
+
 local ParaStroke = Instance.new("UIStroke")
 ParaStroke.Thickness = 3
 ParaStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
