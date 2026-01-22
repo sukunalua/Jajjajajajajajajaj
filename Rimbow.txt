@@ -2051,26 +2051,10 @@ function Window:MakeTab(paste, Configs)
 			local Frame, LabelFunc = ButtonFrame(Container, PName, PDesc, UDim2.new(1, -20))
 			
 			local Paragraph = {}
-function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
-function Paragraph:Destroy() Frame:Destroy() end
-function Paragraph:SetTitle(Val)
-	LabelFunc:SetTitle(GetStr(Val))
-end
-function Paragraph:SetDesc(Val)
-	LabelFunc:SetDesc(GetStr(Val))
-end
-function Paragraph:Set(Val1, Val2)
-	if Val1 and Val2 then
-		LabelFunc:SetTitle(GetStr(Val1))
-		LabelFunc:SetDesc(GetStr(Val2))
-	elseif Val1 then
-		LabelFunc:SetDesc(GetStr(Val1))
-	end
-end
 
-local ParaStrokeFrame = Create("Frame", Frame.Parent, {
+local ParaStrokeFrame = Create("Frame", Frame, {
 	Size = UDim2.new(1, 0, 1, 0),
-	Position = Frame.Position,
+	Position = UDim2.new(0, 0, 0, 0),
 	BackgroundTransparency = 1,
 	ZIndex = Frame.ZIndex - 1
 })
@@ -2090,6 +2074,23 @@ task.spawn(function()
 		task.wait()
 	end
 end)
+
+function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
+function Paragraph:Destroy() Frame:Destroy() end
+function Paragraph:SetTitle(Val)
+	LabelFunc:SetTitle(GetStr(Val))
+end
+function Paragraph:SetDesc(Val)
+	LabelFunc:SetDesc(GetStr(Val))
+end
+function Paragraph:Set(Val1, Val2)
+	if Val1 and Val2 then
+		LabelFunc:SetTitle(GetStr(Val1))
+		LabelFunc:SetDesc(GetStr(Val2))
+	elseif Val1 then
+		LabelFunc:SetDesc(GetStr(Val1))
+	end
+end
 
 return Paragraph
 		end
