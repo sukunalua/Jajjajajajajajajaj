@@ -1507,43 +1507,7 @@ local DropdownHolder = Create("Folder", ScreenGui, {
 			Name = "SubTitle"
 		}), "DarkText")
 	}), "Text")
-	local GlowText = P197.GlowSub or " BRUTON HUB BROOKHAVEN RP "
-local GlowFrameColor = P197.GlowSubColor or Color3.fromRGB(3, 255, 99)
-local SubTitleColor = P197.GlowSubTitleColor or Color3.fromRGB(0, 0, 0)
-
-local GlowFrame = Create("Frame", ParentFrame, {
-    Size = UDim2.new(0, 0, 0, 18),
-    BackgroundColor3 = GlowFrameColor,
-    Name = "GlowSubFrame",
-})
-
-MakeCorner(GlowFrame, UDim.new(0, 4))
-
-local ShadowFrame = Create("Frame", GlowFrame, {
-    Size = UDim2.new(1, 4, 1, 4),
-    Position = UDim2.new(0, -2, 0, -2),
-    BackgroundColor3 = Color3.new(0, 0, 0),
-    BackgroundTransparency = 0.5,
-    ZIndex = -1,
-    Name = "GlowSubShadow",
-})
-MakeCorner(ShadowFrame, UDim.new(0, 4))
-
-local GlowStroke = Instance.new("UIStroke")
-GlowStroke.Thickness = 2
-GlowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-GlowStroke.Parent = GlowFrame
-
-task.spawn(function()
-    while GlowStroke and GlowStroke.Parent do
-        local t = tick() * 0.5
-        local r = math.sin(t) * 0.5 + 0.5
-        local g = math.sin(t + 2) * 0.5 + 0.5
-        local b = math.sin(t + 4) * 0.5 + 0.5
-        GlowStroke.Color = Color3.new(r, g, b)
-        task.wait()
-    end
-end)
+	
 	local MainScroll = InsertTheme(Create("ScrollingFrame", Components, {
 		Size = UDim2.new(0, brutonlib.Save.TabSize, 1, -TopBar.Size.Y.Offset),
 		ScrollBarImageColor3 = Theme["Color Theme"],
