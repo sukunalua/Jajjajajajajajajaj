@@ -1097,7 +1097,7 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
 	})
 })
 local ClickSound = Instance.new("Sound", ScreenGui)
-ClickSound.SoundId = "rbxassetid://1412830636"
+ClickSound.SoundId = "rbxassetid://99804317239292"
 ClickSound.Volume = 0.5
 
 local function PlaySound()
@@ -1446,18 +1446,49 @@ function brutonlib:MakeWindow(Configs)
     Name = "Hub"
 }), "Main")
 
-local WindowBackground = Create("ImageLabel", MainFrame, {
+local WindowBackground = Create("Frame", MainFrame, {
     Name = "WindowBackground",
     Size = UDim2.new(1, 0, 1, 0),
     Position = UDim2.new(0, 0, 0, 0),
-    BackgroundTransparency = 1,
-    Image = "rbxassetid://118030046856109", 
-    ImageTransparency = 0.2,
-    ScaleType = Enum.ScaleType.Crop,
+    BackgroundColor3 = Color3.fromRGB(15, 15, 15),
+    BackgroundTransparency = 0,
     ZIndex = 0
 })
+
 Make("Corner", WindowBackground)
 
+local BackgroundStroke = Instance.new("UIStroke")
+BackgroundStroke.Thickness = 3
+BackgroundStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+BackgroundStroke.Parent = WindowBackground
+
+RunService.RenderStepped:Connect(function(dt)
+    local t = tick() * 0.5
+    local r = math.sin(t) * 0.5 + 0.5
+    local g = math.sin(t + 2) * 0.5 + 0.5
+    local b = math.sin(t + 4) * 0.5 + 0.5
+    BackgroundStroke.Color = Color3.new(r, g, b)
+end)
+
+local RotatingImage = Create("ImageLabel", WindowBackground, {
+    Name = "RotatingImage",
+    Size = UDim2.new(0, 300, 0, 300),
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    BackgroundTransparency = 1,
+    Image = "rbxassetid://97255732156702",
+    ImageTransparency = 0.2,
+    ScaleType = Enum.ScaleType.Crop,
+    Rotation = 0,
+    ZIndex = 1
+})
+
+Make("Corner", RotatingImage, UDim.new(0, 12))
+
+local rotationSpeed = 60
+RunService.RenderStepped:Connect(function(dt)
+    RotatingImage.Rotation = (RotatingImage.Rotation + rotationSpeed * dt) % 360
+end)
 Make("Gradient", MainFrame, {
     Rotation = 45
 })
@@ -1550,8 +1581,8 @@ local ParticleContainer = Create("Frame", Containers, {
 	})
 	
 	local ParticleConfig = {
-	MaxParticles = 90,
-	SpawnRate = 0.7,
+	MaxParticles = 200,
+	SpawnRate = 0.35,
 	ParticleSize = {Min = 7, Max = 10},
 	ParticleSpeed = {Min = 15, Max = 25},
 	ParticleLifetime = 6
@@ -1575,7 +1606,7 @@ local function CreateCyberpunkParticle()
 	local Particle = Create("ImageLabel", ParticleContainer, {
 		Size = UDim2.fromOffset(size + 6, size + 6),
 		Position = UDim2.fromOffset(startX, startY),
-		Image = "rbxassetid://10723406885",
+		Image = "rbxassetid://97255732156702",
 		BackgroundTransparency = 1,
 		ImageTransparency = 0.15,
 		ImageColor3 = particleColor,
@@ -1706,7 +1737,7 @@ end)
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
 			Title = "إغلاق",  
-			Text = "ليش\nليش\nليش\nليش\nليش\nليش\nليش\nمتاكد تريد تغلق سكربت بروتون", 
+			Text = "ليش\nليش\nليش\nليش\nمتاكد تريد تغلق سكربت بروتون", 
 			Options = {
 				{"نعم", function()  
 					ScreenGui:Destroy()
@@ -2147,46 +2178,30 @@ function Window:MakeTab(paste, Configs)
 	return Section
 end
 		function Tab:AddParagraph(Configs)
-	local PName = Configs[1] or Configs.Title or "Paragraph"
-	local PDesc = Configs[2] or Configs.Text or ""
-
-	local Frame, LabelFunc = ButtonFrame(Container, PName, PDesc, UDim2.new(1, -20))
-
-	local Stroke = Instance.new("UIStroke")
-	Stroke.Thickness = 2
-	Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	Stroke.Parent = Frame
-
-	task.spawn(function()
-		while Stroke.Parent do
-			local t = tick() * 0.5
-			local r = math.sin(t) * 0.5 + 0.5
-			local g = math.sin(t + 2) * 0.5 + 0.5
-			local b = math.sin(t + 4) * 0.5 + 0.5
-			Stroke.Color = Color3.new(r, g, b)
-			task.wait()
+			local PName = Configs[1] or Configs.Title or "Paragraph"
+			local PDesc = Configs[2] or Configs.Text or ""
+			
+			local Frame, LabelFunc = ButtonFrame(Container, PName, PDesc, UDim2.new(1, -20))
+			
+			local Paragraph = {}
+			function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
+			function Paragraph:Destroy() Frame:Destroy() end
+			function Paragraph:SetTitle(Val)
+				LabelFunc:SetTitle(GetStr(Val))
+			end
+			function Paragraph:SetDesc(Val)
+				LabelFunc:SetDesc(GetStr(Val))
+			end
+			function Paragraph:Set(Val1, Val2)
+				if Val1 and Val2 then
+					LabelFunc:SetTitle(GetStr(Val1))
+					LabelFunc:SetDesc(GetStr(Val2))
+				elseif Val1 then
+					LabelFunc:SetDesc(GetStr(Val1))
+				end
+			end
+			return Paragraph
 		end
-	end)
-
-	local Paragraph = {}
-	function Paragraph:Visible(...) Funcs:ToggleVisible(Frame, ...) end
-	function Paragraph:Destroy() Frame:Destroy() end
-	function Paragraph:SetTitle(Val)
-		LabelFunc:SetTitle(GetStr(Val))
-	end
-	function Paragraph:SetDesc(Val)
-		LabelFunc:SetDesc(GetStr(Val))
-	end
-	function Paragraph:Set(Val1, Val2)
-		if Val1 and Val2 then
-			LabelFunc:SetTitle(GetStr(Val1))
-			LabelFunc:SetDesc(GetStr(Val2))
-		elseif Val1 then
-			LabelFunc:SetDesc(GetStr(Val1))
-		end
-	end
-	return Paragraph
-end
 		function Tab:AddButton(Configs)
 			local BName = Configs[1] or Configs.Name or Configs.Title or "Button!"
 			local BDescription = Configs.Desc or Configs.Description or ""
@@ -2883,121 +2898,220 @@ end
 			return TextBox
 		end
 			
-	function Tab:AddDiscordInvite(Configs)  -- ننشاء ديسكورد كذا كذا ما بنضيف لاكن نضيفه اذا احتجناه
-	local Title = Configs[1] or Configs.Name or Configs.Title or "Discord"
-	local Desc = Configs.Desc or Configs.Description or ""
-	local Logo = Configs[2] or Configs.Logo or ""
-	local Invite = Configs[3] or Configs.Invite or ""
-
+	function Tab:AddDiscordInvite(Configs)
+	local Title = Configs[1] or Configs.Name or Configs.Title or "Discord Server"
+	local Description = Configs[2] or Configs.Desc or Configs.Description or ""
+	local Logo = Configs[3] or Configs.Icon or Configs.Logo or ""
+	local Invite = Configs[4] or Configs.Invite or Configs.Link or ""
+	local MembersOnline = Configs.Online or Configs.MembersOnline or 0
+	local TotalMembers = Configs.Members or Configs.TotalMembers or 0
+	local BannerImage = Configs.Banner or Configs.BannerImage or ""
+	
 	local InviteHolder = Create("Frame", Container, {
-		Size = UDim2.new(1, 0, 0, 80),
+		Size = UDim2.new(1, 0, 0, 148),
 		Name = "Option",
 		BackgroundTransparency = 1
 	})
-
-	local InviteLabel = Create("TextLabel", InviteHolder, {
+	
+	local InviteLabel = InsertTheme(Create("TextLabel", InviteHolder, {
 		Size = UDim2.new(1, 0, 0, 15),
 		Position = UDim2.new(0, 5),
-		TextColor3 = Color3.fromRGB(160, 100, 255),
+		TextColor3 = Color3.fromRGB(255, 255, 255),
 		Font = Enum.Font.GothamBold,
 		TextXAlignment = "Left",
 		BackgroundTransparency = 1,
-		TextSize = 10,
+		TextSize = 9,
 		Text = Invite
-	})
-
-	local FrameHolder = InsertTheme(Create("Frame", InviteHolder, {
-		Size = UDim2.new(1, 0, 0, 65),
+	}), "Text")
+	
+	local MainFrame = InsertTheme(Create("Frame", InviteHolder, {
+		Size = UDim2.new(0, 178, 1, -15),
+		Position = UDim2.new(0, 5, 1, 0),
 		AnchorPoint = Vector2.new(0, 1),
-		Position = UDim2.new(0, 0, 1),
-		BackgroundColor3 = Color3.fromRGB(90, 0, 150)
-	}), "Frame") Make("Corner", FrameHolder)
-
-	local ImageLabel = Create("ImageLabel", FrameHolder, {
-		Size = UDim2.new(0, 30, 0, 30),
-		Position = UDim2.new(0, 7, 0, 7),
+		BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+		ClipsDescendants = true
+	}), "Frame")
+	Make("Corner", MainFrame, UDim.new(0, 12))
+	Make("Stroke", MainFrame)
+	
+	local BannerArea = Create("ImageLabel", MainFrame, {
+		Size = UDim2.new(1, 0, 0.28, 0),
+		Image = BannerImage,
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = BannerImage ~= "" and 1 or 0,
+		ScaleType = Enum.ScaleType.Crop
+	})
+	Make("Corner", BannerArea, UDim.new(0, 12))
+	
+	if BannerImage == "" then
+		Create("UIGradient", BannerArea, {
+			Rotation = -15,
+			Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))})
+		})
+	end
+	
+	local ServerIcon = Create("ImageLabel", MainFrame, {
+		Size = UDim2.new(0, 33, 0, 33),
+		Position = UDim2.new(0, 10, 0.28, 0),
+		AnchorPoint = Vector2.new(0, 0.5),
 		Image = Logo,
-		BackgroundTransparency = 1
-	}) Make("Corner", ImageLabel, UDim.new(0, 4)) Make("Stroke", ImageLabel)
-
-	local LTitle = InsertTheme(Create("TextLabel", FrameHolder, {
-		Size = UDim2.new(1, -52, 0, 15),
-		Position = UDim2.new(0, 44, 0, 7),
-		Font = Enum.Font.GothamBold,
-		TextColor3 = Color3.fromRGB(230, 200, 255),
+		BackgroundTransparency = Logo == "" and 1 or 0,
+		BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	})
+	Make("Corner", ServerIcon, UDim.new(0, 8))
+	if Logo ~= "" then
+		Make("Stroke", ServerIcon, nil, Color3.fromRGB(0, 0, 0), 2.2)
+	end
+	
+	local ServerTitle = InsertTheme(Create("TextLabel", MainFrame, {
+		Size = UDim2.new(1, -20, 0, 10),
+		Position = UDim2.new(0, 10, 0.44, 0),
 		TextXAlignment = "Left",
 		BackgroundTransparency = 1,
-		TextSize = 10,
-		Text = Title
+		TextSize = 11,
+		Text = Title,
+		Font = Enum.Font.GothamBold,
+		TextColor3 = Color3.fromRGB(255, 255, 255)
 	}), "Text")
-
-	local LDesc = InsertTheme(Create("TextLabel", FrameHolder, {
-		Size = UDim2.new(1, -52, 0, 0),
-		Position = UDim2.new(0, 44, 0, 22),
-		TextWrapped = true,
-		AutomaticSize = "Y",
-		Font = Enum.Font.Gotham,
-		TextColor3 = Color3.fromRGB(190, 150, 255),
+	
+	local MembersFrame
+	if MembersOnline > 0 or TotalMembers > 0 then
+		MembersFrame = Create("Frame", MainFrame, {
+			Size = UDim2.new(1, -20, 0, 9),
+			Position = UDim2.new(0, 7, 0.52, 0),
+			BackgroundTransparency = 1
+		}, {
+			Create("UIListLayout", {
+				HorizontalAlignment = "Left",
+				VerticalAlignment = "Center",
+				FillDirection = "Horizontal",
+				Padding = UDim.new(0, 4)
+			}),
+			Create("UIPadding", {
+				PaddingLeft = UDim.new(0, 3),
+				PaddingRight = UDim.new(0, 10)
+			})
+		})
+		
+		local function CreateStatusIndicator(color, text)
+			local StatusFrame = Create("Frame", MembersFrame, {
+				Size = UDim2.new(0, 0, 1, 0),
+				AutomaticSize = "X",
+				BackgroundTransparency = 1
+			})
+			
+			local StatusDot = Create("Frame", StatusFrame, {
+				Size = UDim2.new(0, 3, 0, 3),
+				Position = UDim2.new(0, 5, 0.5, 0),
+				AnchorPoint = Vector2.new(0, 0.5),
+				BackgroundColor3 = color
+			})
+			Make("Corner", StatusDot, UDim.new(1, 0))
+			
+			local StatusText = InsertTheme(Create("TextLabel", StatusFrame, {
+				Size = UDim2.new(0, 0, 1, 0),
+				Position = UDim2.new(0, 12, 0.5, 0),
+				AnchorPoint = Vector2.new(0, 0.5),
+				AutomaticSize = "X",
+				BackgroundTransparency = 1,
+				TextSize = 7,
+				Text = text,
+				Font = Enum.Font.Gotham,
+				TextColor3 = Color3.fromRGB(255, 255, 255)
+			}), "DarkText")
+		end
+		
+		if MembersOnline > 0 then
+			CreateStatusIndicator(Color3.fromRGB(255, 255, 255), MembersOnline .. " Online")
+		end
+		
+		if TotalMembers > 0 then
+			CreateStatusIndicator(Color3.fromRGB(255, 255, 255), TotalMembers .. " Members")
+		end
+	end
+	
+	local DescriptionLabel = InsertTheme(Create("TextLabel", MainFrame, {
+		Size = UDim2.new(1, -60, 0, 8),
+		Position = UDim2.new(0, 10, MembersFrame and 0.6 or 0.56, 0),
 		TextXAlignment = "Left",
+		AutomaticSize = "Y",
 		BackgroundTransparency = 1,
 		TextSize = 8,
-		Text = Desc
+		Text = Description,
+		TextWrapped = true,
+		Font = Enum.Font.Gotham,
+		TextColor3 = Color3.fromRGB(255, 255, 255)
 	}), "DarkText")
-
-	local JoinButton = Create("TextButton", FrameHolder, {
-		Size = UDim2.new(1, -14, 0, 16),
+	
+	local BottomSection = InsertTheme(Create("Frame", MainFrame, {
+		Size = UDim2.new(1, 0, Description == "" and 0.28 or 0.42, 0),
+		Position = UDim2.new(0, 0, 1, 0),
+		AnchorPoint = Vector2.new(0, 1),
+		BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+		BorderSizePixel = 0
+	}), "Frame")
+	
+	if Description ~= "" then
+		Create("UIGradient", BottomSection, {
+			Rotation = -90,
+			Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.60, 0.00), NumberSequenceKeypoint.new(1.00, 1.00)})
+		})
+	end
+	
+	local JoinButton = InsertTheme(Create("TextButton", BottomSection, {
+		Position = UDim2.new(0.5, 0, 1, -9),
+		Size = UDim2.new(1, -18, 0, 18),
 		AnchorPoint = Vector2.new(0.5, 1),
-		Position = UDim2.new(0.5, 0, 1, -7),
-		Text = "Join",
+		Text = "Join Server",
 		Font = Enum.Font.GothamBold,
-		TextSize = 12,
-		TextColor3 = Color3.fromRGB(240, 220, 255),
-		BackgroundColor3 = Color3.fromRGB(120, 60, 200)
-	}) Make("Corner", JoinButton, UDim.new(0, 5))
-
-	local ClickDelay
+		TextSize = 10,
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		TextColor3 = Color3.fromRGB(0, 0, 0)
+	}), "Text")
+	Make("Corner", JoinButton, UDim.new(0.5, 0))
+	
+	local clickCooldown = 0
 	JoinButton.Activated:Connect(function()
-		setclipboard(Invite)
-		if ClickDelay then return end
-
-		ClickDelay = true
-		SetProps(JoinButton, {
-			Text = "Copied to Clipboard",
-			BackgroundColor3 = Color3.fromRGB(90, 40, 150),
-			TextColor3 = Color3.fromRGB(200, 180, 220)
-		}) task.wait(5)
-		SetProps(JoinButton, {
-			Text = "Join",
-			BackgroundColor3 = Color3.fromRGB(120, 60, 200),
-			TextColor3 = Color3.fromRGB(240, 220, 255)
-		}) ClickDelay = false
+		if tick() - clickCooldown < 5 then return end
+		clickCooldown = tick()
+		
+		local originalText = JoinButton.Text
+		JoinButton.Text = "Copied to Clipboard!"
+		
+		if setclipboard then
+			setclipboard(Invite)
+		end
+		
+		local Sound = Instance.new("Sound", JoinButton)
+		Sound.SoundId = "rbxassetid://89519777884850"
+		Sound.Volume = 1
+		Sound:Play()
+		
+		task.wait(4)
+		if JoinButton and JoinButton.Parent then
+			JoinButton.Text = originalText
+		end
 	end)
-
+	
 	local DiscordInvite = {}
-	function DiscordInvite:Destroy()
-		InviteHolder:Destroy()
+	function DiscordInvite:Destroy() InviteHolder:Destroy() end
+	function DiscordInvite:Visible(...) Funcs:ToggleVisible(InviteHolder, ...) end
+	function DiscordInvite:Set(newTitle, newDesc, newInvite)
+		if newTitle then ServerTitle.Text = newTitle end
+		if newDesc then DescriptionLabel.Text = newDesc end
+		if newInvite then InviteLabel.Text = newInvite end
 	end
-	function DiscordInvite:Visible(...)
-		Funcs:ToggleVisible(InviteHolder, ...)
-	end
+	
 	return DiscordInvite
 end
+
 return Tab
-end
+	end
 	
 	CloseButton.Activated:Connect(Window.CloseBtn)
 	MinimizeButton.Activated:Connect(Window.MinimizeBtn)
+
 	return Window
 end
-if not success or (config and config.Status == "False") then 
-    if game.CoreGui:FindFirstChild("LanguageSelectorHub") then
-        game.CoreGui.LanguageSelectorHub:Destroy()
-    end
-    return 
-end
-
 
 return brutonlib
-
--- SV LIB
--- by Shadow
