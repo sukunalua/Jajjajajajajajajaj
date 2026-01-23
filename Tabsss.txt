@@ -1725,7 +1725,6 @@ SetChildren(ButtonsFolder, {CloseButton})
 
 local SettingsTab = Window:MakeTab({
     Title = "Settings Lib",
-    SubTitle = WMiniText,
     Icon = "rbxassetid://97255732156702"
 })
 	local Minimized, SaveSize, WaitClick
