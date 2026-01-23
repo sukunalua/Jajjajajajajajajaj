@@ -1454,6 +1454,7 @@ local WindowBackground = Create("Frame", MainFrame, {
     BackgroundTransparency = 0,
     ZIndex = 0
 })
+
 Make("Corner", WindowBackground)
 
 local BackgroundStroke = Instance.new("UIStroke")
@@ -1462,13 +1463,11 @@ BackgroundStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 BackgroundStroke.Parent = WindowBackground
 
 RunService.RenderStepped:Connect(function(dt)
-    if coloringEnabled then
-        local t = tick() * 0.5
-        local r = math.sin(t) * 0.5 + 0.5
-        local g = math.sin(t + 2) * 0.5 + 0.5
-        local b = math.sin(t + 4) * 0.5 + 0.5
-        BackgroundStroke.Color = Color3.new(r, g, b)
-    end
+    local t = tick() * 0.5
+    local r = math.sin(t) * 0.5 + 0.5
+    local g = math.sin(t + 2) * 0.5 + 0.5
+    local b = math.sin(t + 4) * 0.5 + 0.5
+    BackgroundStroke.Color = Color3.new(r, g, b)
 end)
 
 local RotatingImage = Create("ImageLabel", WindowBackground, {
@@ -1483,12 +1482,12 @@ local RotatingImage = Create("ImageLabel", WindowBackground, {
     Rotation = 0,
     ZIndex = 1
 })
+
 Make("Corner", RotatingImage, UDim.new(0, 12))
 
+local rotationSpeed = 60
 RunService.RenderStepped:Connect(function(dt)
-    if imageRotatingEnabled then
-        RotatingImage.Rotation = (RotatingImage.Rotation + rotationSpeed * dt) % 360
-    end
+    RotatingImage.Rotation = (RotatingImage.Rotation + rotationSpeed * dt) % 360
 end)
 Make("Gradient", MainFrame, {
     Rotation = 45
