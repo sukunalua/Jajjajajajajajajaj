@@ -1723,10 +1723,7 @@ end)
 
 SetChildren(ButtonsFolder, {CloseButton})
 
-local SettingsTab = Window:MakeTab({
-    Title = "Settings Lib",
-    Icon = "rbxassetid://97255732156702"
-})
+
 	local Minimized, SaveSize, WaitClick
 	local Window, FirstTab = {}, false
 	function Window:CloseBtn()
@@ -3099,7 +3096,10 @@ end
 	
 	return DiscordInvite
 end
-
+local SettingsTab = Window:MakeTab({
+    Title = "Settings Lib",
+    Icon = "rbxassetid://97255732156702"
+})
 return Tab
 	end
 	
