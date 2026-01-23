@@ -3096,10 +3096,7 @@ end
 	
 	return DiscordInvite
 end
-local SettingsTab = Window:MakeTab({
-    Title = "Settings Lib",
-    Icon = "rbxassetid://97255732156702"
-})
+
 return Tab
 	end
 	
@@ -3108,5 +3105,8 @@ return Tab
 
 	return Window
 end
-
+local PlayerTab = Window:MakeTab({
+    Title = "اللاعب",
+    Icon = "rbxassetid://17132521951"
+})
 return brutonlib
