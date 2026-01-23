@@ -1460,15 +1460,8 @@ Make("Corner", WindowBackground)
 local BackgroundStroke = Instance.new("UIStroke")
 BackgroundStroke.Thickness = 3
 BackgroundStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+BackgroundStroke.Color = Color3.fromRGB(15, 15, 15)
 BackgroundStroke.Parent = WindowBackground
-
-RunService.RenderStepped:Connect(function(dt)
-    local t = tick() * 0.5
-    local r = math.sin(t) * 0.5 + 0.5
-    local g = math.sin(t + 2) * 0.5 + 0.5
-    local b = math.sin(t + 4) * 0.5 + 0.5
-    BackgroundStroke.Color = Color3.new(r, g, b)
-end)
 
 local RotatingImage = Create("ImageLabel", WindowBackground, {
     Name = "RotatingImage",
@@ -1476,7 +1469,7 @@ local RotatingImage = Create("ImageLabel", WindowBackground, {
     Position = UDim2.new(0.5, 0, 0.5, 0),
     AnchorPoint = Vector2.new(0.5, 0.5),
     BackgroundTransparency = 1,
-    Image = "rbxassetid://97255732156702",
+    Image = "rbxassetid://0",
     ImageTransparency = 0.2,
     ScaleType = Enum.ScaleType.Crop,
     Rotation = 0,
@@ -1485,10 +1478,6 @@ local RotatingImage = Create("ImageLabel", WindowBackground, {
 
 Make("Corner", RotatingImage, UDim.new(0, 12))
 
-local rotationSpeed = 60
-RunService.RenderStepped:Connect(function(dt)
-    RotatingImage.Rotation = (RotatingImage.Rotation + rotationSpeed * dt) % 360
-end)
 Make("Gradient", MainFrame, {
     Rotation = 45
 })
