@@ -620,6 +620,8 @@ function MakeTab(Configs)
     local TabStroke = Instance.new("UIStroke")
     TabStroke.Thickness = 2
     TabStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    TabStroke.LineJoinMode = Enum.LineJoinMode.Round
+    TabStroke.Color = Color3.new(1, 1, 1)
     TabStroke.Parent = Frame
     
     local TabGradient = Instance.new("UIGradient")
@@ -631,7 +633,7 @@ function MakeTab(Configs)
     TabGradient.Parent = TabStroke
 
     RunService.Heartbeat:Connect(function(dt)
-        TabGradient.Rotation = (TabGradient.Rotation + 80 * dt) % 360
+        TabGradient.Rotation = (TabGradient.Rotation + 100 * dt) % 360
     end)
     
     local TextButton = Create("TextButton", Frame, {
@@ -644,8 +646,8 @@ function MakeTab(Configs)
       Size = UDim2.new(1, 0, 1, 0),
       BackgroundTransparency = 1,
       Font = Configs_HUB.Text_Font,
-      TextColor3 = textcolor,
-      TextSize = textsize,
+      TextColor3 = Configs_HUB.Cor_DarkText,
+      TextSize = 14,
       Text = TabName
     })
     
@@ -677,7 +679,7 @@ function MakeTab(Configs)
         end
       end
       for _,frame in pairs(ScrollBar:GetChildren()) do
-        if frame:IsA("Frame") and frame:FindFirstChild("TextLabel") and frame.TextLabel ~= TextLabel then
+        if frame:IsA("Frame") and frame:FindFirstChild("TextLabel") then
           CreateTween(frame.TextLabel, "TextColor3", Configs_HUB.Cor_DarkText, 0.3, false)
           frame.TextLabel.TextSize = 14
         end
@@ -688,9 +690,6 @@ function MakeTab(Configs)
     end)
     
     firstVisible = false
-    FirstTab = false
-    textsize = 14
-    textcolor = Configs_HUB.Cor_DarkText
     return Container
 end
 
