@@ -630,9 +630,9 @@ local WindowBackground = Create("ImageLabel", MainFrame, {
 	Position = UDim2.new(0, 0, 0, 0),
 	BackgroundColor3 = Color3.fromRGB(0, 120, 255),
 	BackgroundTransparency = 0.5,
-        Image = "rbxassetid://102266309145667", 
-        ImageTransparency = 0,
-        ScaleType = Enum.ScaleType.Crop,
+	Image = "rbxassetid://102266309145667", 
+	ImageTransparency = 0,
+	ScaleType = Enum.ScaleType.Crop,
 	ZIndex = 0
 })
 Make("Corner", WindowBackground)
@@ -657,7 +657,7 @@ BorderGradient.Color = ColorSequence.new{
 }
 BorderGradient.Rotation = 0
 BorderGradient.Parent = BorderStroke
-local borderSpeed = 80
+local borderSpeed = 50
 RunService.Heartbeat:Connect(function(dt)
 	BorderGradient.Rotation = (BorderGradient.Rotation + borderSpeed * dt) % 360
 end)
@@ -863,7 +863,6 @@ end)
 	function Window:AddMinimizeButton(Configs)
 	Configs = Configs or {}
 	
-	-- Create the main pill-shaped frame
 	local ButtonFrame = InsertTheme(Create("Frame", ScreenGui, {
 		Name = "MinimizeButton",
 		Size = UDim2.new(0, 180, 0, 40),
@@ -874,13 +873,11 @@ end)
 		BackgroundTransparency = 0.1
 	}), "Frame")
 	
-	-- Add UICorner
 	local Corner = Make("Corner", ButtonFrame, UDim.new(0.3, 0))
 	if Configs.Corner then
 		SetProps(Corner, Configs.Corner)
 	end
 	
-	-- Add UIStroke with animated gradient
 	local Stroke = Instance.new("UIStroke")
 	Stroke.Thickness = Configs.StrokeThickness or 2
 	Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
@@ -891,7 +888,6 @@ end)
 		SetProps(Stroke, Configs.Stroke)
 	end
 	
-	-- Add UIGradient to stroke
 	local StrokeGradient = Instance.new("UIGradient")
 	StrokeGradient.Color = ColorSequence.new({
 		ColorSequenceKeypoint.new(0, Configs.GradientColor1 or Color3.fromRGB(60, 140, 255)),
@@ -901,7 +897,6 @@ end)
 	StrokeGradient.Rotation = 0
 	StrokeGradient.Parent = Stroke
 	
-	-- Animate the gradient
 	local RunService = game:GetService("RunService")
 	local borderSpeed = Configs.GradientSpeed or 80
 	local connection
@@ -918,14 +913,12 @@ end)
 		end)
 	end
 	
-	-- Add UIListLayout for horizontal arrangement
 	local ListLayout = Instance.new("UIListLayout")
 	ListLayout.FillDirection = Enum.FillDirection.Horizontal
 	ListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 	ListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	ListLayout.Parent = ButtonFrame
 	
-	-- Create drag handle
 	local DragHandle = Create("Frame", ButtonFrame, {
 		Name = "DragHandle",
 		LayoutOrder = 1,
@@ -933,17 +926,15 @@ end)
 		Size = UDim2.new(0, 45, 1, 0)
 	})
 	
-	-- Drag icon
 	local DragIcon = Create("ImageLabel", DragHandle, {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Size = UDim2.new(0, 20, 0, 20),
-		Image = Configs.DragIcon or "rbxassetid://116138709011735",
+		Image = Configs.DragIcon or "rbxassetid://10723375250",
 		ImageColor3 = Configs.DragIconColor or Color3.fromRGB(150, 150, 150),
 		BackgroundTransparency = 1
 	})
 	
-	-- Separator container
 	local SeparatorContainer = Create("Frame", ButtonFrame, {
 		Name = "SeparatorContainer",
 		LayoutOrder = 2,
@@ -951,7 +942,6 @@ end)
 		Size = UDim2.new(0, 2, 1, 0)
 	})
 	
-	-- Separator line
 	local SeparatorLine = Create("Frame", SeparatorContainer, {
 		Name = "Line",
 		AnchorPoint = Vector2.new(0.5, 0.5),
@@ -961,7 +951,6 @@ end)
 		BorderSizePixel = 0
 	})
 	
-	-- Main toggle button
 	local ToggleButton = InsertTheme(Create("TextButton", ButtonFrame, {
 		Name = "ToggleButton",
 		LayoutOrder = 3,
@@ -974,10 +963,8 @@ end)
 		TextSize = 14
 	}), "Frame")
 	
-	-- Button corner
 	local ButtonCorner = Make("Corner", ToggleButton, UDim.new(0.3, 0))
 	
-	-- Button content holder
 	local ButtonContent = Create("Frame", ToggleButton, {
 		Name = "Content",
 		AnchorPoint = Vector2.new(0.5, 0.5),
@@ -986,7 +973,6 @@ end)
 		BackgroundTransparency = 1
 	})
 	
-	-- Button content list layout
 	local ButtonList = Instance.new("UIListLayout")
 	ButtonList.FillDirection = Enum.FillDirection.Horizontal
 	ButtonList.VerticalAlignment = Enum.VerticalAlignment.Center
@@ -995,17 +981,15 @@ end)
 	ButtonList.Padding = UDim.new(0, 8)
 	ButtonList.Parent = ButtonContent
 	
-	-- Button icon
 	local ButtonIcon = Create("ImageLabel", ButtonContent, {
 		Name = "BtnIcon",
 		LayoutOrder = 1,
 		Size = UDim2.new(0, Configs.IconSize or 20, 0, Configs.IconSize or 20),
-		Image = Configs.Icon or "rbxassetid://120545479757972",
+		Image = Configs.Icon or "rbxassetid://86342558293723",
 		ImageColor3 = Configs.IconColor or Color3.fromRGB(255, 255, 255),
 		BackgroundTransparency = 1
 	})
 	
-	-- Button text
 	local ButtonText = InsertTheme(Create("TextLabel", ButtonContent, {
 		Name = "BtnText",
 		LayoutOrder = 2,
@@ -1013,12 +997,11 @@ end)
 		Size = UDim2.new(0, 0, 1, 0),
 		AutomaticSize = Enum.AutomaticSize.X,
 		Font = Configs.Font or Enum.Font.GothamMedium,
-		Text = Configs.Text or "Open Hub",
+		Text = Configs.Text or "فتح سكربت",
 		TextColor3 = Configs.TextColor or Theme["Color Text"] or Color3.fromRGB(240, 240, 240),
 		TextSize = Configs.TextSize or 14
 	}), "Text")
 	
-	-- Drag functionality
 	local dragging, dragInput, dragStart, startPos
 	
 	local function update(input)
@@ -1058,7 +1041,6 @@ end)
 		end
 	end)
 	
-	-- Hover effects
 	ToggleButton.MouseEnter:Connect(function()
 		CreateTween({ToggleButton, "BackgroundColor3", Configs.HoverColor or Color3.fromRGB(40, 40, 40), 0.2})
 	end)
@@ -1067,32 +1049,29 @@ end)
 		CreateTween({ToggleButton, "BackgroundColor3", Configs.ButtonColor or Theme["Color Hub 2"] or Color3.fromRGB(30, 30, 30), 0.2})
 	end)
 	
-	-- Toggle functionality
 	local isVisible = true
 	
 	local function ToggleWindow()
 		isVisible = not isVisible
 		
 		if isVisible then
-			ButtonText.Text = Configs.OpenText or "Open Hub"
+			ButtonText.Text = Configs.OpenText or "فتح سكربت"
 			ButtonIcon.Image = Configs.OpenIcon or "rbxassetid://120545479757972"
 		else
-			ButtonText.Text = Configs.ClosedText or "Closed"
+			ButtonText.Text = Configs.ClosedText or "اغلاق"
 			ButtonIcon.Image = Configs.ClosedIcon or "rbxassetid://10734896206"
 		end
 		
-		-- Toggle the main window visibility
 		if Window and Window.Minimize then
 			Window:Minimize()
 		else
-			-- Fallback if Window.Minimize doesn't exist
+		
 			MainFrame.Visible = isVisible
 		end
 	end
 	
 	ToggleButton.Activated:Connect(ToggleWindow)
 	
-	-- Return the button object with all components
 	local MinimizeButton = {
 		Frame = ButtonFrame,
 		Corner = Corner,
@@ -1106,7 +1085,6 @@ end)
 		ButtonIcon = ButtonIcon,
 		ButtonText = ButtonText,
 		
-		-- Methods
 		SetPosition = function(self, position)
 			ButtonFrame.Position = position
 		end,
@@ -1122,10 +1100,10 @@ end)
 		SetState = function(self, visible)
 			isVisible = visible
 			if isVisible then
-				ButtonText.Text = Configs.OpenText or "Open Hub"
+				ButtonText.Text = Configs.OpenText or "فتح سكربت"
 				ButtonIcon.Image = Configs.OpenIcon or "rbxassetid://120545479757972"
 			else
-				ButtonText.Text = Configs.ClosedText or "Closed"
+				ButtonText.Text = Configs.ClosedText or "اغلاق"
 				ButtonIcon.Image = Configs.ClosedIcon or "rbxassetid://10734896206"
 			end
 		end,
