@@ -860,6 +860,7 @@ end)
 	function Window:Minimize()
 		MainFrame.Visible = not MainFrame.Visible
 	end
+	
 	function Window:AddMinimizeButton(Configs)
 	Configs = Configs or {}
 	
