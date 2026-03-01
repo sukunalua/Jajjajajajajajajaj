@@ -802,12 +802,12 @@ end)
 	
     local CustomButton = SetProps(CloseButton:Clone(), {
         Position = UDim2.new(1, -60, 0.5),
-        Image = "rbxassetid://83380517901735", -- 16149101469
+        Image = "rbxassetid://10723405649", 
         Name = "CustomScriptButton"
     })
     CustomButton.MouseButton1Click:Connect(function()
         pcall(function()
-            loadstring(game:HttpGet('https://raw.githubusercontent.com/nxvap/cdn/db/src/fly'))()
+            loadstring(game:HttpGet('https://pastebin.com/raw/7UrrgNSg'))()
         end)
     end)
 
