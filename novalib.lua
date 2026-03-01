@@ -998,7 +998,7 @@ end)
 		Size = UDim2.new(0, 0, 1, 0),
 		AutomaticSize = Enum.AutomaticSize.X,
 		Font = Configs.Font or Enum.Font.GothamMedium,
-		Text = Configs.Text or "فتح سكربت",
+		Text = Configs.Text or "LOC4T",
 		TextColor3 = Configs.TextColor or Theme["Color Text"] or Color3.fromRGB(240, 240, 240),
 		TextSize = Configs.TextSize or 14
 	}), "Text")
@@ -1056,11 +1056,11 @@ end)
 		isVisible = not isVisible
 		
 		if isVisible then
-			ButtonText.Text = Configs.OpenText or "فتح سكربت"
-			ButtonIcon.Image = Configs.OpenIcon or "rbxassetid://120545479757972"
+			ButtonText.Text = Configs.OpenText or "LOC4T"
+			ButtonIcon.Image = Configs.OpenIcon or "rbxassetid://86342558293723"
 		else
-			ButtonText.Text = Configs.ClosedText or "اغلاق"
-			ButtonIcon.Image = Configs.ClosedIcon or "rbxassetid://10734896206"
+			ButtonText.Text = Configs.ClosedText or "LOC4T"
+			ButtonIcon.Image = Configs.ClosedIcon or "rbxassetid://86342558293723"
 		end
 		
 		if Window and Window.Minimize then
@@ -1101,11 +1101,11 @@ end)
 		SetState = function(self, visible)
 			isVisible = visible
 			if isVisible then
-				ButtonText.Text = Configs.OpenText or "فتح سكربت"
-				ButtonIcon.Image = Configs.OpenIcon or "rbxassetid://120545479757972"
+				ButtonText.Text = Configs.OpenText or "LOC4T"
+				ButtonIcon.Image = Configs.OpenIcon or "rbxassetid://86342558293723"
 			else
-				ButtonText.Text = Configs.ClosedText or "اغلاق"
-				ButtonIcon.Image = Configs.ClosedIcon or "rbxassetid://10734896206"
+				ButtonText.Text = Configs.ClosedText or "LOC4T"
+				ButtonIcon.Image = Configs.ClosedIcon or "rbxassetid://86342558293723"
 			end
 		end,
 		
